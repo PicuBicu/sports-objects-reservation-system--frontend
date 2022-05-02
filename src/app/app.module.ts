@@ -15,7 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatButtonModule} from "@angular/material/button";
 import { HttpClientModule } from '@angular/common/http';
-
+import {ToastrModule, ToastrService} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatButtonToggleModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
