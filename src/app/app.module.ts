@@ -14,8 +14,9 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatButtonModule} from "@angular/material/button";
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ToastrModule} from 'ngx-toastr';
+import {AuthInterceptor} from "./auth/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,11 @@ import {ToastrModule} from 'ngx-toastr';
       preventDuplicates: true,
     }),
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
