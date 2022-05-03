@@ -1,22 +1,27 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import LoginDto from "../model/LoginDto";
-import UserDto from "../../user/UserDto";
 import {ToastrService} from "ngx-toastr";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   public loginForm!: FormGroup;
+  private loginSubscription!: Subscription;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
               private toastService: ToastrService) {
+  }
+
+  ngOnDestroy(): void {
+    this.loginSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -34,42 +39,24 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get("password") as FormControl;
   }
 
-  public submitForm() {
+  public submitForm(): void {
     if (this.loginForm.valid) {
       const loginDto = this.loginForm.value as LoginDto;
-      console.log(loginDto);
-      this.authService.signUserIn(loginDto).subscribe(
-        user => {
-          this.saveUserToSessionStorage(user);
-          this.toastService.success(`Witaj ${user.firstName}`, 'Major Error', {
-            timeOut: 3000,
-          });
+      this.loginSubscription = this.authService.signUserIn(loginDto).subscribe({
+        next: (user) => {
+          this.authService.saveUserInSessionStorage(user);
+          this.authService.saveToken(user.jwtToken);
+          this.authService.saveExpirationDate(user.expiresAt)
+          this.toastService.success(`Witaj ${user.firstName} 😄`, 'Sukces');
         },
-        error => {
-          switch (error.status) {
-            case 403:
-              this.toastService.error("Niepoprawne dane logowania", 'Major Error', {
-                timeOut: 3000,
-              });
-          }
-
+        error: error => {
+          console.log(error);
+          this.toastService.error("Niepoprawne dane logowania 😥", 'Błąd')
         }
-      );
+      });
     }
   }
 
-  private saveUserToSessionStorage(user: UserDto) {
-    sessionStorage.setItem("token", user.jwtToken);
-    sessionStorage.setItem("email", user.email);
-    sessionStorage.setItem("firstName", user.firstName);
-    sessionStorage.setItem("lastName", user.lastName);
-    sessionStorage.setItem("localNumber", user.address.localNumber);
-    sessionStorage.setItem("cityName", user.address.cityName);
-    sessionStorage.setItem("streetName", user.address.streetName);
-    sessionStorage.setItem("streetNumber", user.address.streetNumber);
-    sessionStorage.setItem("phoneNumber", user.phoneNumber);
-    sessionStorage.setItem("userRole", user.role.join(","));
-  }
 
 }
 
