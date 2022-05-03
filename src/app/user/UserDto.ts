@@ -1,6 +1,7 @@
 import Address from "../address/Address";
 
 export default interface UserDto {
+  expiresAt: string;
   jwtToken: string;
   firstName: string;
   lastName: string;
