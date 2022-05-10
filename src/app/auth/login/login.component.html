@@ -1,38 +1,54 @@
-<div class="login-container">
-  <form (ngSubmit)="submitForm()" [formGroup]="loginForm">
-    <h2>Logowanie</h2>
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Podaj swój email:</mat-label>
-        <input formControlName="email"
-               matInput
-               name="email"
-               placeholder="przyklad@example.com"
-               required
-               type="text">
-      </mat-form-field>
-      <ng-container *ngIf="loginForm.touched">
-        <mat-error *ngIf="email().hasError('required')">Podaj email</mat-error>
-        <mat-error *ngIf="email().hasError('email')">Podaj poprawny email</mat-error>
-      </ng-container>
-    </p>
-    <p>
-      <mat-form-field appearance="outline" color="accent">
-        <mat-label>Podaj hasło:</mat-label>
-        <input formControlName="password"
-               matInput
-               name="password"
-               placeholder="hasło"
-               required
-               type="password"/>
-        <mat-error *ngIf="!password().hasError('required')">
-          Podaj poprawne hasło
-        </mat-error>
-      </mat-form-field>
-    </p>
-    <p>
-      <button color="accent" mat-raised-button type="submit">Zaloguj</button>
-      <button color="primary" mat-raised-button type="reset">Reset</button>
-    </p>
-  </form>
+<div class="background">
+  <mat-grid-list cols="2" class="login-form-wrapper">
+    <mat-grid-tile class="login-container">
+      <div class="login-form">
+        <form (ngSubmit)="submitForm()" [formGroup]="loginForm">
+          <h2>Logowanie</h2>
+          <p>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Podaj swój email:</mat-label>
+              <input formControlName="email"
+                     matInput
+                     name="email"
+                     placeholder="przyklad@example.com"
+                     required
+                     [value]=""
+                     type="text">
+              <mat-error *ngIf="email?.touched && email?.errors?.required">
+                Podaj email
+              </mat-error>
+              <mat-error *ngIf="email?.touched && email?.errors?.email">
+                Podaj poprawny email
+              </mat-error>
+            </mat-form-field>
+
+          </p>
+          <p>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Podaj hasło:</mat-label>
+              <input formControlName="password"
+                     matInput
+                     name="password"
+                     placeholder="hasło"
+                     required
+                     type="password">
+              <mat-error *ngIf="password?.touched && password?.invalid">
+                Podaj hasło
+              </mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <button color="accent" mat-raised-button type="submit">Zaloguj</button>
+            <button color="primary" mat-raised-button type="reset">Reset</button>
+          </p>
+        </form>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="photo-container">
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
+
+
+
+

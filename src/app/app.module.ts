@@ -17,6 +17,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ToastrModule} from 'ngx-toastr';
 import {AuthInterceptor} from "./auth/auth.interceptor";
+import { RegisterComponent } from './auth/register/register.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import {AuthInterceptor} from "./auth/auth.interceptor";
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    MatGridListModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

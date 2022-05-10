@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  public email(): FormControl {
-    return this.loginForm.get("email") as FormControl;
+  get email() {
+    return this.loginForm.get("email");
   }
 
-  public password(): FormControl {
-    return this.loginForm.get("password") as FormControl;
+  get password() {
+    return this.loginForm.get("password");
   }
 
   public submitForm(): void {
