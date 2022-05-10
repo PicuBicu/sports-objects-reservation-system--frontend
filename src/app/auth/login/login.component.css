@@ -1,30 +1,6 @@
-.login-form-wrapper {
-  width: 80%;
-  margin-top: 20px;
-}
-
-.login-container {
-  background-color: #fff;
-  flex: 1;
-  border-radius: 20px 0px 0px 20px;
-}
-
-.login-form button {
-  margin-right: 20px;
-}
-
 .photo-container {
-  flex: 1;
   background-image: url("../../../assets/background.avif");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right center;
-  border-radius: 0px 20px 20px 0px;
-}
-.background {
-  background-color: #05981f;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
 }
