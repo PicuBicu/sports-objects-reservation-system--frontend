@@ -1,0 +1,9 @@
+.photo-container {
+  background-image: url("../../../assets/background.avif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+
+

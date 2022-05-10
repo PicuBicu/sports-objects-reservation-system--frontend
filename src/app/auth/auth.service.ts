@@ -4,19 +4,24 @@ import LoginDto from "./model/LoginDto";
 import {Observable} from "rxjs";
 import UserDto from "../user/UserDto";
 import * as moment from "moment";
+import {RegisterDto} from "./model/RegisterDto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private authUrl: string = "http://localhost:8080/api/auth/sign-in";
+  private authUrl: string = "http://localhost:8080/api/auth";
 
   constructor(private httpClient: HttpClient) {
   }
 
   public signUserIn(loginDto: LoginDto): Observable<UserDto> {
-    return this.httpClient.post<UserDto>(this.authUrl, loginDto);
+    return this.httpClient.post<UserDto>(`${this.authUrl}/sign-in`, loginDto);
+  }
+
+  public signUserUp(registerDto: RegisterDto): Observable<any> {
+    return this.httpClient.post<UserDto>(`${this.authUrl}/sign-up`, registerDto);
   }
 
   public isLoggedIn(): boolean {

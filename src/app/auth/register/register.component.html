@@ -1,0 +1,165 @@
+<mat-grid-list cols="2">
+  <mat-grid-tile>
+    <mat-stepper #stepper linear>
+      <mat-step [stepControl]="personalDataForm" label="Podaj swoje dane osobowe">
+        <form [formGroup]="personalDataForm">
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Imię:</mat-label>
+              <input formControlName="firstName"
+                     matInput
+                     name="firstName"
+                     placeholder="Jan"
+                     required
+                     type="text">
+              <mat-error *ngIf="firstName?.touched && firstName?.errors?.required">
+                Podaj swoję imię
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Nazwisko:</mat-label>
+              <input formControlName="lastName"
+                     matInput
+                     name="lastName"
+                     placeholder="Kowalski"
+                     required
+                     type="text">
+              <mat-error *ngIf="lastName?.touched && lastName?.errors?.required">
+                Podaj swoję nazwisko
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Numer telefonu:</mat-label>
+              <input formControlName="phoneNumber"
+                     matInput
+                     name="phoneNumber"
+                     pattern="[0-9]{7,9}"
+                     placeholder="999999999"
+                     required
+                     type="phoneNumber">
+              <mat-error *ngIf="phoneNumber?.touched && phoneNumber?.errors?.required">
+                Podaj numer telefonu
+              </mat-error>
+              <mat-error *ngIf="phoneNumber?.touched && phoneNumber?.errors?.pattern">
+                Podaj poprawny numer telefonu
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Email:</mat-label>
+              <input formControlName="email"
+                     matInput
+                     name="email"
+                     placeholder="przyklad@gmail.com"
+                     required
+                     type="email">
+              <mat-error *ngIf="email?.touched && email?.errors?.required">
+                Podaj adres email
+              </mat-error>
+              <mat-error *ngIf="email?.touched && email?.errors?.email">
+                Podaj poprawny adres email
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Hasło:</mat-label>
+              <input formControlName="password"
+                     matInput
+                     name="password"
+                     required
+                     type="password">
+              <mat-error *ngIf="password?.touched && password?.errors?.required">
+                Podaj hasło
+              </mat-error>
+              <mat-error *ngIf="password?.touched && password?.errors?.pattern">
+                Znaki specjalne, 1 duża, 1 mała litera, cyfry
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-raised-button matStepperNext>Dalej</button>
+            <button mat-raised-button type="reset">Resetuj</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="addressFormData" label="Podaj adres zamieszkania">
+        <form (ngSubmit)="submitForm()" [formGroup]="addressFormData">
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Nazwa ulicy:</mat-label>
+              <input [value]=""
+                     formControlName="streetName"
+                     matInput
+                     name="streetName"
+                     required
+                     type="streetName">
+              <mat-error *ngIf="streetName?.touched && streetName?.errors?.required">
+                Podaj hasło
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Numer ulicy:</mat-label>
+              <input [value]=""
+                     formControlName="streetNumber"
+                     matInput
+                     name="streetNumber"
+                     required
+                     type="streetNumber">
+              <mat-error *ngIf="streetNumber?.touched && streetNumber?.errors?.required">
+                Podaj hasło
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Numer lokalu:</mat-label>
+              <input [value]=""
+                     formControlName="localNumber"
+                     matInput
+                     name="localNumber"
+                     required
+                     type="localNumber">
+              <mat-error *ngIf="localNumber?.touched && localNumber?.errors?.required">
+                Podaj numer lokalu
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Miasto:</mat-label>
+              <input [value]=""
+                     formControlName="cityName"
+                     matInput
+                     name="cityName"
+                     required
+                     type="cityName">
+              <mat-error *ngIf="cityName?.touched && cityName?.errors?.required">
+                Podaj miasto
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Cofnij</button>
+            <button (click)="stepper.reset()" mat-button>Resetuj</button>
+            <button [disabled]="!personalDataForm.valid || !addressFormData.valid" color="primary" mat-raised-button
+                    type="submit">Zarejestruj się
+            </button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </mat-grid-tile>
+  <mat-grid-tile class="photo-container"></mat-grid-tile>
+</mat-grid-list>
+
+
+
+

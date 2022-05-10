@@ -17,36 +17,41 @@ import {MatButtonModule} from "@angular/material/button";
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ToastrModule} from 'ngx-toastr';
 import {AuthInterceptor} from "./auth/auth.interceptor";
-import { RegisterComponent } from './auth/register/register.component';
+import {RegisterComponent} from './auth/register/register.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatCardModule} from "@angular/material/card";
+import {MatStepperModule} from "@angular/material/stepper";
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonToggleModule,
-    MatButtonModule,
-    HttpClientModule,
-    ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-    }),
-    MatGridListModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonToggleModule,
+        MatButtonModule,
+        HttpClientModule,
+        ToastrModule.forRoot({
+            timeOut: 10000,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true,
+        }),
+        MatGridListModule,
+        MatCardModule,
+        MatStepperModule,
+    ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
