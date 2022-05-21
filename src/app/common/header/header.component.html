@@ -1,11 +1,26 @@
-<mat-toolbar color="accent">
+<mat-toolbar color="primary">
   <mat-toolbar-row class="header-row">
     <span>Orlikowo</span>
     <span class="example-spacer"></span>
-    <span>Obiekty</span>
-    <span>Rezerwacje</span>
-    <span>Moje dane</span>
-    <span (click)="goToLogin($event)">Zaloguj się</span>
-    <span>Zarejestruj się</span>
+    <ng-container>
+      <span>Obiekty</span>
+      <span>Rezerwacje</span>
+      <span>Moje dane</span>
+    </ng-container>
+    <ng-container>
+      <span>
+        <a routerLink="/login">Zaloguj się</a>
+      </span>
+      <span>
+        <a routerLink="/register">Zarejestruj się</a>
+      </span>
+      <span>
+        <button mat-button color="primary">
+          <a (click)="logout()">
+            Zarejestruj się
+          </a>
+         </button>
+      </span>
+    </ng-container>
   </mat-toolbar-row>
 </mat-toolbar>
