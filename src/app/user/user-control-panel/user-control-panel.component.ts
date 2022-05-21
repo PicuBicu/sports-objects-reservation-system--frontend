@@ -57,7 +57,7 @@ export class UserControlPanelComponent {
          console.log(error);
          this.toastService.error("Nie udało się usunąć użytkownika");
        }
-     })
+     });
   }
 
   setUserActivationStatus(email: string, isActivated: boolean) {

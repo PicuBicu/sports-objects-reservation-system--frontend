@@ -17,7 +17,7 @@ export class UserService {
   }
 
   public deleteUserByEmail(email: string): Observable<string> {
-    return this.httpClient.delete<string>(`${this.userUrl}/${email}`);
+    return this.httpClient.delete(`${this.userUrl}/${email}`, {responseType: "text"});
   }
 
   public getAllUsersByActivationStatus(isActivated: boolean): Observable<UserDto[]> {
