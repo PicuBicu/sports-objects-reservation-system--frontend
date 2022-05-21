@@ -4,6 +4,7 @@ import {ToastrService} from "ngx-toastr";
 import {RegisterDto} from "../model/RegisterDto";
 import {AuthService} from "../auth.service";
 import {Subscription} from "rxjs";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ import {Subscription} from "rxjs";
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
-  private static PASSWORD_REGEXP = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}/;
+  private static PASSWORD_REGEXP = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}/; // TODO: not matching java regexp
   private static PHONE_NUMBER_REGEXP = new RegExp("[0-9]{7,9}", 'm');
   public personalDataForm!: FormGroup;
   public addressFormData!: FormGroup;
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
               private toastService: ToastrService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
   }
 
   get firstName() {
@@ -91,10 +93,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.toastService.success(`Pomyślnie zarejestrowano użytkownika`, 'Sukces');
           this.personalDataForm.reset();
           this.addressFormData.reset();
+          this.router.navigateByUrl("login");
         },
         error: error => {
-          console.log(error);
-          this.toastService.error("Niepoprawne dane rejestracji", 'Błąd')
+          switch(error.status) {
+            case 400: this.toastService.error(`Niepoprawne dane rejestracji`, 'Błąd'); break;
+            case 403: this.toastService.error(`Podany użytkownik już istnieje`, 'Błąd'); break;
+          }
         }
       });
     }
