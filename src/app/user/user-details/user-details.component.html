@@ -1,0 +1,34 @@
+<app-header></app-header>
+<mat-card class="user-data-card">
+    <mat-card-header>
+        <div mat-card-avatar>
+            <mat-icon>face</mat-icon>
+        </div>
+        <mat-card-title>{{userData?.email}}</mat-card-title>
+        <mat-card-subtitle>
+            {{userData?.role}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <h4>Dane osobowe</h4>
+        <p>Imie: {{userData?.firstName}}</p>
+        <p>Nazwisko: {{userData?.lastName}}</p>
+        <p>Numer telefonu: {{userData?.phoneNumber}}</p>
+        <h4>Adres zamieszkania</h4>
+        <p>Ulica: {{userData?.address?.streetName}} {{userData?.address?.streetNumber}} / {{ userData?.address?.localNumber }}</p>
+        <p>Miasto: {{userData?.address?.cityName}}</p>
+    </mat-card-content>
+    <mat-card-footer>
+        <!-- TODO: creation timestamp -->
+        <p>Data utworzenia: </p>
+    </mat-card-footer>
+</mat-card>
+<mat-card class="user-reservations-card">
+    <mat-card-header>
+        <div mat-card-avatar>
+            <mat-icon>card_travel</mat-icon>
+        </div>
+        <mat-card-title>Rezerwacje</mat-card-title>
+    </mat-card-header>
+</mat-card>
+<app-footer></app-footer>

@@ -16,6 +16,10 @@ export class UserService {
     return this.httpClient.get<UserDto[]>(`${this.userUrl}/`);
   }
 
+  public getUserByEmail(email: string): Observable<UserDto> {
+    return this.httpClient.get<UserDto>(`${this.userUrl}/${email}`);
+  }
+
   public deleteUserByEmail(email: string): Observable<string> {
     return this.httpClient.delete(`${this.userUrl}/${email}`, {responseType: "text"});
   }

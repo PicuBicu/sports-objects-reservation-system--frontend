@@ -11,9 +11,10 @@ import {MatSort} from "@angular/material/sort";
   templateUrl: './user-control-panel.component.html',
   styleUrls: ['./user-control-panel.component.css']
 })
+// TODO: need to refresh component after performing delete and change user account activation status
 export class UserControlPanelComponent {
 
-  displayedColumns: string[] = ['firstName', 'lastName', "phoneNumber", "email", "deletion", "changeStatus"];
+  displayedColumns: string[] = ['firstName', 'lastName', "phoneNumber", "email", "deletion", "changeStatus", "userData"];
   dataSource: MatTableDataSource<UserDto>;
   users: UserDto[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;

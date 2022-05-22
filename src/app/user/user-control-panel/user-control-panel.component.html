@@ -8,7 +8,9 @@
   <mat-card-content >
     <div class="mat-elevation-z8">
       <table [dataSource]="dataSource" mat-table matSort>
+        <a>
 
+        </a>
         <ng-container matColumnDef="firstName">
           <th *matHeaderCellDef mat-header-cell mat-sort-header> Imie</th>
           <td *matCellDef="let row" mat-cell> {{row.firstName}} </td>
@@ -44,6 +46,15 @@
             <!-- TODO: change checkbox only if subscribe will return success -->
             <mat-checkbox class="example-margin" [(ngModel)] = "row.isActivated" (ngModelChange)="setUserActivationStatus(row.email, row.isActivated)">
             </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userData">
+          <th *matHeaderCellDef mat-header-cell>
+            Profil
+          </th>
+          <td *matCellDef="let row" mat-cell>
+              <a [routerLink]="['/users/', row.email]">Wyświetl</a>
           </td>
         </ng-container>
 

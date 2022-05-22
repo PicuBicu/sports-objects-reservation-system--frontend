@@ -26,6 +26,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatDividerModule} from "@angular/material/divider";
+import { UserDetailsComponent } from './user/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    UserControlPanelComponent
+    UserControlPanelComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatDividerModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
