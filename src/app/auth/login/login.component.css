@@ -1,6 +1,33 @@
-.photo-container {
+.login-form-wrapper {
   background-image: url("../../../assets/background.avif");
   background-size: cover;
-  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-position: right center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
 }
+
+.login-form-card {
+  background-color: #fff;
+  min-width: 20vw;
+  min-height: 30vh;
+  padding: 30px 40px;
+}
+
+.login-form-card mat-form-field {
+  width: 100%
+}
+
+.login-form-card  button {
+  font-size: 1.1rem;
+}
+
+

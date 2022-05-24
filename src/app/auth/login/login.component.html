@@ -1,17 +1,20 @@
-<mat-grid-list class="login-form-wrapper" cols="2">
-  <mat-grid-tile class="login-container">
-    <div class="login-form">
+<div class="login-form-wrapper">
+  <mat-card class="login-form-card">
+    <h2>⚽ Orlikowo ⚽</h2>
+    <mat-card-content>
       <form (ngSubmit)="submitForm()" [formGroup]="loginForm">
         <h2>Logowanie</h2>
         <div>
           <mat-form-field appearance="outline" color="accent">
             <mat-label>Podaj swój email:</mat-label>
-            <input formControlName="email"
-                   matInput
-                   name="email"
-                   placeholder="przyklad@example.com"
-                   required
-                   type="text">
+            <input
+              formControlName="email"
+              matInput
+              name="email"
+              placeholder="przyklad@example.com"
+              required
+              type="text"
+            />
             <mat-error *ngIf="email?.touched && email?.errors?.required">
               Podaj email
             </mat-error>
@@ -23,29 +26,26 @@
         <div>
           <mat-form-field appearance="outline" color="accent">
             <mat-label>Podaj hasło:</mat-label>
-            <input formControlName="password"
-                   matInput
-                   name="password"
-                   placeholder="hasło"
-                   required
-                   type="password">
+            <input
+              formControlName="password"
+              matInput
+              name="password"
+              placeholder="hasło"
+              required
+              type="password"
+            />
             <mat-error *ngIf="password?.touched && password?.invalid">
               Podaj hasło
             </mat-error>
           </mat-form-field>
         </div>
-        <p>
-          <button color="accent" mat-raised-button type="submit">Zaloguj</button>
+        <mat-card-actions>
+          <button color="accent" mat-raised-button type="submit">
+            Zaloguj
+          </button>
           <button color="primary" mat-raised-button type="reset">Reset</button>
-        </p>
+        </mat-card-actions>
       </form>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile class="photo-container">
-  </mat-grid-tile>
-</mat-grid-list>
-
-
-
-
-
+    </mat-card-content>
+  </mat-card>
+</div>
