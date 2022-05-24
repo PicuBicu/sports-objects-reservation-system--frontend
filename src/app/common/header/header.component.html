@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="application-header">
   <mat-toolbar-row class="header-row">
     <span>⚽Orlikowo⚽</span>
     <span class="example-spacer"></span>
@@ -7,10 +7,8 @@
       <span>Rezerwacje</span>
       <span>Moje dane</span>
       <span>
-        <a [routerLink]="['/users']">
-          Użytkownicy
-        </a>
-    </span>
+        <a [routerLink]="['/users']"> Użytkownicy </a>
+      </span>
     </ng-container>
     <ng-container>
       <span>
@@ -20,9 +18,7 @@
         <a routerLink="/register">Zarejestruj się</a>
       </span>
       <span>
-        <a (click)="logout()">
-          Wyloguj się
-        </a>
+        <a (click)="logout()"> Wyloguj się </a>
       </span>
     </ng-container>
   </mat-toolbar-row>
