@@ -27,7 +27,7 @@ export class RoleGuard implements CanActivate {
     const expectedRoles = route.data.expectedRoles;
     const token: string = localStorage.getItem('token') || '';
     const tokenPayload: any = decode(token);
-    console.log(tokenPayload.roles.map((role) => role.authority));
+    // console.log(tokenPayload.roles.map((role) => role.authority));
     return true;
   }
 }

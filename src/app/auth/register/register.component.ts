@@ -1,64 +1,65 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ToastrService} from "ngx-toastr";
-import {RegisterDto} from "../model/RegisterDto";
-import {AuthService} from "../auth.service";
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { RegisterRequest } from 'app/app/models/request/register-request';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-
-  private static PASSWORD_REGEXP = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}/; // TODO: not matching java regexp
-  private static PHONE_NUMBER_REGEXP = new RegExp("[0-9]{7,9}", 'm');
+  private static PASSWORD_REGEXP =
+    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}/; // TODO: not matching java regexp
+  private static PHONE_NUMBER_REGEXP = new RegExp('[0-9]{7,9}', 'm');
   public personalDataForm!: FormGroup;
   public addressFormData!: FormGroup;
   private registerSubscription!: Subscription;
 
-  constructor(private formBuilder: FormBuilder,
-              private toastService: ToastrService,
-              private authService: AuthService,
-              private router: Router) {
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastService: ToastrService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   get firstName() {
-    return this.personalDataForm.get("firstName");
+    return this.personalDataForm.get('firstName');
   }
 
   get lastName() {
-    return this.personalDataForm.get("lastName");
+    return this.personalDataForm.get('lastName');
   }
 
   get phoneNumber() {
-    return this.personalDataForm.get("phoneNumber");
+    return this.personalDataForm.get('phoneNumber');
   }
 
   get email() {
-    return this.personalDataForm.get("email");
+    return this.personalDataForm.get('email');
   }
 
   get password() {
-    return this.personalDataForm.get("password");
+    return this.personalDataForm.get('password');
   }
 
   get streetName() {
-    return this.addressFormData.get("streetName");
+    return this.addressFormData.get('streetName');
   }
 
   get streetNumber() {
-    return this.addressFormData.get("streetNumber");
+    return this.addressFormData.get('streetNumber');
   }
 
   get localNumber() {
-    return this.addressFormData.get("localNumber");
+    return this.addressFormData.get('localNumber');
   }
 
   get cityName() {
-    return this.addressFormData.get("cityName");
+    return this.addressFormData.get('cityName');
   }
 
   ngOnDestroy(): void {
@@ -67,41 +68,64 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.personalDataForm = this.formBuilder.group({
-      firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
-      phoneNumber: ["", [Validators.required, Validators.pattern(RegisterComponent.PHONE_NUMBER_REGEXP)]],
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.pattern(RegisterComponent.PASSWORD_REGEXP)]],
-
-    })
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(RegisterComponent.PHONE_NUMBER_REGEXP),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(RegisterComponent.PASSWORD_REGEXP),
+        ],
+      ],
+    });
     this.addressFormData = this.formBuilder.group({
-      streetName: ["", Validators.required],
-      streetNumber: ["", Validators.required],
-      localNumber: ["", Validators.required],
-      cityName: ["", Validators.required]
-    })
+      streetName: ['', Validators.required],
+      streetNumber: ['', Validators.required],
+      localNumber: ['', Validators.required],
+      cityName: ['', Validators.required],
+    });
   }
 
   public submitForm(): void {
     if (this.personalDataForm.valid && this.addressFormData) {
       const registerDto = {
         ...this.personalDataForm.value,
-        ...this.addressFormData.value
-      } as RegisterDto;
-      this.registerSubscription = this.authService.signUserUp(registerDto).subscribe({
-        next: (item) => {
-          this.toastService.success(`Pomyślnie zarejestrowano użytkownika`, 'Sukces');
-          this.personalDataForm.reset();
-          this.addressFormData.reset();
-          this.router.navigateByUrl("login");
-        },
-        error: error => {
-          switch(error.status) {
-            case 400: this.toastService.error(`Niepoprawne dane rejestracji`, 'Błąd'); break;
-            case 403: this.toastService.error(`Podany użytkownik już istnieje`, 'Błąd'); break;
-          }
-        }
-      });
+        ...this.addressFormData.value,
+      } as RegisterRequest;
+      this.registerSubscription = this.authService
+        .signUserUp(registerDto)
+        .subscribe({
+          next: (item) => {
+            this.toastService.success(
+              `Pomyślnie zarejestrowano użytkownika`,
+              'Sukces'
+            );
+            this.personalDataForm.reset();
+            this.addressFormData.reset();
+            this.router.navigateByUrl('login');
+          },
+          error: (error) => {
+            switch (error.status) {
+              case 400:
+                this.toastService.error(`Niepoprawne dane rejestracji`, 'Błąd');
+                break;
+              case 403:
+                this.toastService.error(
+                  `Podany użytkownik już istnieje`,
+                  'Błąd'
+                );
+                break;
+            }
+          },
+        });
     }
   }
 }

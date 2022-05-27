@@ -1,6 +1,6 @@
-import Address from "../address/Address";
+import { Address } from './address';
 
-export default interface UserDto {
+export interface User {
   expiresAt: string;
   jwtToken: string;
   firstName: string;
