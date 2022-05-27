@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { LoginRequest } from "app/app/models/request/login-request";
-import { RegisterRequest } from "app/app/models/request/register-request";
+import { LoginRequest } from "app/models/request/login-request";
+import { RegisterRequest } from "app/models/request/register-request";
 import { BehaviorSubject, Observable } from "rxjs";
 import * as moment from "moment";
 import { Router } from "@angular/router";
-import { User } from "app/app/models/entities/user";
+import { User } from "app/models/entities/user";
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({

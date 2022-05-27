@@ -1,26 +1,26 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../user.service';
-import { ToastrService } from 'ngx-toastr';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { User } from 'app/app/models/entities/user';
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import { UserService } from "../user.service";
+import { ToastrService } from "ngx-toastr";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { User } from "app/models/entities/user";
 
 @Component({
-  selector: 'app-user-control-panel',
-  templateUrl: './user-control-panel.component.html',
-  styleUrls: ['./user-control-panel.component.css'],
+  selector: "app-user-control-panel",
+  templateUrl: "./user-control-panel.component.html",
+  styleUrls: ["./user-control-panel.component.css"],
 })
 // TODO: need to refresh component after performing delete and change user account activation status
 export class UserControlPanelComponent {
   displayedColumns: string[] = [
-    'firstName',
-    'lastName',
-    'phoneNumber',
-    'email',
-    'deletion',
-    'changeStatus',
-    'userData',
+    "firstName",
+    "lastName",
+    "phoneNumber",
+    "email",
+    "deletion",
+    "changeStatus",
+    "userData",
   ];
   dataSource: MatTableDataSource<User>;
   users: User[] = [];
@@ -52,7 +52,7 @@ export class UserControlPanelComponent {
         this.dataSource.sort = this.sort;
       },
       error: () => {
-        this.toastService.error('Nie udało się pobrać użytkowników');
+        this.toastService.error("Nie udało się pobrać użytkowników");
       },
     });
   }
@@ -60,11 +60,11 @@ export class UserControlPanelComponent {
   deleteUser(email: string) {
     this.userService.deleteUserByEmail(email).subscribe({
       next: (message) => {
-        this.toastService.success('Pomyślnie usunięto użytkownika');
+        this.toastService.success("Pomyślnie usunięto użytkownika");
       },
       error: (error) => {
         console.log(error);
-        this.toastService.error('Nie udało się usunąć użytkownika');
+        this.toastService.error("Nie udało się usunąć użytkownika");
       },
     });
   }

@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from 'app/app/models/entities/user';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { User } from "app/models/entities/user";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class UserService {
-  private userUrl: string = 'http://localhost:8080/api/user';
+  private userUrl: string = "http://localhost:8080/api/user";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -21,7 +21,7 @@ export class UserService {
 
   public deleteUserByEmail(email: string): Observable<string> {
     return this.httpClient.delete(`${this.userUrl}/${email}`, {
-      responseType: 'text',
+      responseType: "text",
     });
   }
 
@@ -39,7 +39,7 @@ export class UserService {
   ): Observable<string> {
     return this.httpClient.put<any>(
       `${this.userUrl}/?email=${email}&isActivated=${isActivated}`,
-      { responseType: 'text' }
+      { responseType: "text" }
     );
   }
 }

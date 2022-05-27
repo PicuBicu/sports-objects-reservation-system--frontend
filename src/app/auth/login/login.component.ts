@@ -8,7 +8,8 @@ import {
 import { AuthService } from "../auth.service";
 import { ToastrService } from "ngx-toastr";
 import { Subscription } from "rxjs";
-import { LoginRequest } from "app/app/models/request/login-request";
+import { LoginRequest } from "app/models/request/login-request";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private router: Router
   ) {}
 
   ngOnDestroy(): void {
@@ -51,7 +53,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (user) => {
           this.authService.saveUserInSessionStorage(user);
           this.authService.saveToken(user.jwtToken);
-          this.toastService.success(`Witaj ${user.firstName} 😄`, "Sukces");
+          this.toastService
+            .success(`Witaj ${user.firstName} 😄`, "Sukces")
+            .onShown.subscribe({
+              next: () => {
+                this.router.navigateByUrl("home");
+              },
+            });
         },
         error: (error) => {
           console.log(error);

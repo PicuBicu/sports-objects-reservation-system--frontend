@@ -1,16 +1,16 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
-import { User } from 'app/app/models/entities/user';
-import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
-import { UserService } from '../user.service';
+import { ThisReceiver } from "@angular/compiler";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router, RouterLinkActive } from "@angular/router";
+import { User } from "app/models/entities/user";
+import { ToastrService } from "ngx-toastr";
+import { map } from "rxjs";
+import { Observable } from "rxjs/internal/Observable";
+import { UserService } from "../user.service";
 
 @Component({
-  selector: 'app-user-details',
-  templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.css'],
+  selector: "app-user-details",
+  templateUrl: "./user-details.component.html",
+  styleUrls: ["./user-details.component.css"],
 })
 export class UserDetailsComponent implements OnInit {
   userData?: User;

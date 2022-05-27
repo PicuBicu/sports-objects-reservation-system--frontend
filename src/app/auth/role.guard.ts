@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
-import { JwtPayload } from "app/app/models/jwt-payload";
+import { JwtPayload } from "app/models/jwt-payload";
 import decode from "jwt-decode";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
@@ -30,8 +30,7 @@ export class RoleGuard implements CanActivate {
     const payload: JwtPayload = decode(token);
     if (this.authService.isLoggedIn()) {
       if (!this.authService.hasAnyRole(expectedRole, payload.roles)) {
-        console.error("NOT ENOUGH PERMISSIONS");
-        // todo: redirection to role based starting page
+        this.router.navigateByUrl("home");
       } else {
         this.router.navigateByUrl("login");
       }

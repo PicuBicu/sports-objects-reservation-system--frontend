@@ -3,78 +3,85 @@
   <mat-card-title>Użytkownicy</mat-card-title>
   <mat-form-field appearance="outline">
     <mat-label>Wyszukiwarka</mat-label>
-    <input #input (keyup)="applyFilter($event)" matInput placeholder="Jan Kowalski">
+    <input
+      #input
+      (keyup)="applyFilter($event)"
+      matInput
+      placeholder="Jan Kowalski"
+    />
   </mat-form-field>
-  <mat-card-content >
+  <mat-card-content>
     <div class="mat-elevation-z8">
       <table [dataSource]="dataSource" mat-table matSort>
-        <a>
-
-        </a>
         <ng-container matColumnDef="firstName">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header> Imie</th>
-          <td *matCellDef="let row" mat-cell> {{row.firstName}} </td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Imie</th>
+          <td *matCellDef="let row" mat-cell>{{ row.firstName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="lastName">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header> Nazwisko</th>
-          <td *matCellDef="let row" mat-cell> {{row.lastName}} </td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Nazwisko</th>
+          <td *matCellDef="let row" mat-cell>{{ row.lastName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="phoneNumber">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header> Numer telefonu</th>
-          <td *matCellDef="let row" mat-cell> {{row.phoneNumber}} </td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            Numer telefonu
+          </th>
+          <td *matCellDef="let row" mat-cell>{{ row.phoneNumber }}</td>
         </ng-container>
 
         <ng-container matColumnDef="email">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header> Email</th>
-          <td *matCellDef="let row" mat-cell> {{row.email}} </td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Email</th>
+          <td *matCellDef="let row" mat-cell>{{ row.email }}</td>
         </ng-container>
 
         <ng-container matColumnDef="deletion">
-          <th *matHeaderCellDef  mat-header-cell>Usuń</th>
+          <th *matHeaderCellDef mat-header-cell>Usuń</th>
           <td *matCellDef="let row" mat-cell>
-              <button mat-button (click)="deleteUser(row.email)">Usuń</button>
+            <button mat-button (click)="deleteUser(row.email)">Usuń</button>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="changeStatus">
-          <th *matHeaderCellDef mat-header-cell>
-            Status
-          </th>
+          <th *matHeaderCellDef mat-header-cell>Status</th>
           <td *matCellDef="let row" mat-cell>
             <!-- TODO: change checkbox only if subscribe will return success -->
-            <mat-checkbox class="example-margin" [(ngModel)] = "row.isActivated" (ngModelChange)="setUserActivationStatus(row.email, row.isActivated)">
+            <mat-checkbox
+              class="example-margin"
+              [(ngModel)]="row.isActivated"
+              (ngModelChange)="
+                setUserActivationStatus(row.email, row.isActivated)
+              "
+            >
             </mat-checkbox>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="userData">
-          <th *matHeaderCellDef mat-header-cell>
-            Profil
-          </th>
+          <th *matHeaderCellDef mat-header-cell>Profil</th>
           <td *matCellDef="let row" mat-cell>
-              <a [routerLink]="['/users/', row.email]">Wyświetl</a>
+            <a [routerLink]="['/users/', row.email]">Wyświetl</a>
           </td>
         </ng-container>
 
         <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
 
         <tr *matNoDataRow class="mat-row">
-          <td class="mat-cell" colspan="4">Żadne dane nie pasują do filtra "{{input.value}}"</td>
+          <td class="mat-cell" colspan="4">
+            Żadne dane nie pasują do filtra "{{ input.value }}"
+          </td>
         </tr>
       </table>
-
-    </div>      
+    </div>
   </mat-card-content>
 
   <mat-card-footer>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of users"
+    ></mat-paginator>
   </mat-card-footer>
-
 </mat-card>
 
-<app-footer>
-  
-</app-footer>
+<app-footer> </app-footer>
