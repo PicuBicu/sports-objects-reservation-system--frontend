@@ -1,0 +1,12 @@
+.create-new-sport-object-dialog-form {
+    padding: 20px 30px;
+    min-width: 25vw;
+}
+
+.create-new-sport-object-dialog-form mat-form-field {
+    width: 100%;
+}
+.control-buttons{
+    display: flex;
+    justify-content:space-evenly;
+}

@@ -1,0 +1,109 @@
+<div class="create-new-sport-object-dialog-form">
+  <form (ngSubmit)="submitForm()" [formGroup]="createSportObjectForm">
+    <h2>Dodawanie obiektu sportowego</h2>
+    <div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Nazwa:</mat-label>
+        <input
+          formControlName="name"
+          matInput
+          name="name"
+          placeholder="Orlik"
+          required
+          type="text"
+        />
+        <mat-error *ngIf="name?.touched && name?.errors?.required">
+          Podaj nazwę obiektu sportowego
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Url obrazka:</mat-label>
+        <input
+          formControlName="imageName"
+          matInput
+          name="imageName"
+          placeholder="image url"
+          required
+          type="text"
+        />
+        <mat-error *ngIf="imageName?.touched && imageName?.errors?.required">
+          Podaj url obrazka:
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Miasto:</mat-label>
+        <input
+          formControlName="cityName"
+          matInput
+          name="cityName"
+          placeholder="miasto"
+          required
+          type="text"
+        />
+        <mat-error *ngIf="cityName?.touched && cityName?.errors?.required">
+          Podaj miasto
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Ulica:</mat-label>
+        <input
+          formControlName="streetName"
+          matInput
+          name="streetName"
+          placeholder="ulica"
+          required
+          type="text"
+        />
+        <mat-error *ngIf="streetName?.touched && streetName?.errors?.required">
+          Podaj nazwę ulicy
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Numer ulicy:</mat-label>
+        <input
+          formControlName="streetNumber"
+          matInput
+          name="streetNumber"
+          placeholder="numer ulicy"
+          required
+          type="text"
+        />
+        <mat-error
+          *ngIf="streetNumber?.touched && streetNumber?.errors?.required"
+        >
+          Podaj numer ulicy
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Numer mieszkania:</mat-label>
+        <input
+          formControlName="localNumber"
+          matInput
+          name="localNumber"
+          placeholder="numer ulicy"
+          required
+          type="text"
+        />
+        <mat-error
+          *ngIf="localNumber?.touched && localNumber?.errors?.required"
+        >
+          Podaj numer mieszkania
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="control-buttons">
+      <button color="accent" mat-raised-button type="submit">Utwórz</button>
+      <button color="primary" mat-raised-button type="reset">Reset</button>
+    </div>
+  </form>
+</div>
