@@ -1,0 +1,12 @@
+<app-header></app-header>
+<mat-card>
+    <mat-card-title>Obiekty sportowe</mat-card-title>
+    <mat-form-field appearance="outline">
+        <mat-label>Wyszukiwarka</mat-label>
+        <input #input matInput placeholder="Orlik">
+    </mat-form-field>
+    <button mat-fab color="primary" (click)="openCreateSportObjectDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+</mat-card>
+<app-footer></app-footer>
