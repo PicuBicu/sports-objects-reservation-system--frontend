@@ -1,25 +1,30 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import LoginDto from "./model/LoginDto";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import UserDto from "../user/UserDto";
 import * as moment from "moment";
 import {RegisterDto} from "./model/RegisterDto";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+// todo: change current jwt checking to jwt library
 export class AuthService {
 
-  private authUrl: string = "http://localhost:8080/api/auth";
+  // todo: add behaviour subject
 
-  constructor(private httpClient: HttpClient) {
+  private authUrl: string = "http://localhost:8080/api/auth";
+ 
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   public signUserIn(loginDto: LoginDto): Observable<UserDto> {
-    return this.httpClient.post<UserDto>(`${this.authUrl}/sign-in`, loginDto);
+    return this.httpClient.post<UserDto>(`${this.authUrl}/sign-in`, loginDto).pipe();
   }
 
+  // todo: could be type not any type
   public signUserUp(registerDto: RegisterDto): Observable<any> {
     return this.httpClient.post<UserDto>(`${this.authUrl}/sign-up`, registerDto);
   }
@@ -52,6 +57,7 @@ export class AuthService {
   public logout(): void {
     localStorage.removeItem("token");
     localStorage.removeItem("expires_at");
+    this.router.navigateByUrl("login");
   }
 
   private getExpiration(): moment.Moment {
