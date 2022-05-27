@@ -27,7 +27,10 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatDialogModule} from "@angular/material/dialog";
 import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { SportObjectControlPanelComponent } from './sport-objects/sport-objects-control-panel/sport-object-control-panel.component';
+import { CreateSportObjectDialogComponent } from './sport-objects/create-sport-object-dialog/create-sport-object-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { UserDetailsComponent } from './user/user-details/user-details.component
     LoginComponent,
     RegisterComponent,
     UserControlPanelComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    SportObjectControlPanelComponent,
+    CreateSportObjectDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import { UserDetailsComponent } from './user/user-details/user-details.component
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
