@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
   RouterStateSnapshot,
   UrlTree,
-} from '@angular/router';
-import decode, { JwtPayload } from 'jwt-decode';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+} from "@angular/router";
+import { JwtPayload } from "app/app/models/jwt-payload";
+import decode from "jwt-decode";
+import { Observable } from "rxjs";
+import { AuthService } from "./auth.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class RoleGuard implements CanActivate {
   constructor(public authService: AuthService, public router: Router) {}
@@ -24,10 +25,18 @@ export class RoleGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const expectedRoles = route.data.expectedRoles;
-    const token: string = localStorage.getItem('token') || '';
-    const tokenPayload: any = decode(token);
-    // console.log(tokenPayload.roles.map((role) => role.authority));
-    return true;
+    const expectedRole = route.data.expectedRoles;
+    const token: string = localStorage.getItem("token") ?? "";
+    const payload: JwtPayload = decode(token);
+    if (this.authService.isLoggedIn()) {
+      if (!this.authService.hasAnyRole(expectedRole, payload.roles)) {
+        console.error("NOT ENOUGH PERMISSIONS");
+        // todo: redirection to role based starting page
+      } else {
+        this.router.navigateByUrl("login");
+      }
+      return false;
+    }
+    return false;
   }
 }

@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import * as moment from "moment";
 import { Router } from "@angular/router";
 import { User } from "app/app/models/entities/user";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: "root",
@@ -16,7 +17,11 @@ export class AuthService {
 
   private authUrl: string = "http://localhost:8080/api/auth";
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private jwtHelper: JwtHelperService
+  ) {}
 
   public signUserIn(loginDto: LoginRequest): Observable<User> {
     return this.httpClient
@@ -30,7 +35,8 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return moment().isBefore(this.getExpiration());
+    const tokenString: string = localStorage.getItem("token") ?? "";
+    return !this.jwtHelper.isTokenExpired(tokenString);
   }
 
   public saveUserInSessionStorage(user: User): void {
@@ -45,24 +51,16 @@ export class AuthService {
     sessionStorage.setItem("userRole", user.role.join(","));
   }
 
-  public saveExpirationDate(expirationTime: string): void {
-    const expiresAt = moment().add(expirationTime, "second");
-    localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-  }
-
   public saveToken(token: string): void {
     localStorage.setItem("token", token);
   }
 
   public logout(): void {
     localStorage.removeItem("token");
-    localStorage.removeItem("expires_at");
     this.router.navigateByUrl("login");
   }
 
-  private getExpiration(): moment.Moment {
-    const expiration = localStorage.getItem("expires_at") || "";
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
+  public hasAnyRole(expectedRole: string, roleList: string[]) {
+    return roleList.filter((role) => expectedRole === role).length !== 0;
   }
 }

@@ -1,19 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { LoginRequest } from 'app/app/models/request/login-request';
+} from "@angular/forms";
+import { AuthService } from "../auth.service";
+import { ToastrService } from "ngx-toastr";
+import { Subscription } from "rxjs";
+import { LoginRequest } from "app/app/models/request/login-request";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm!: FormGroup;
@@ -31,17 +31,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required]],
     });
   }
 
   get email() {
-    return this.loginForm.get('email');
+    return this.loginForm.get("email");
   }
 
   get password() {
-    return this.loginForm.get('password');
+    return this.loginForm.get("password");
   }
 
   public submitForm(): void {
@@ -51,12 +51,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (user) => {
           this.authService.saveUserInSessionStorage(user);
           this.authService.saveToken(user.jwtToken);
-          this.authService.saveExpirationDate(user.expiresAt);
-          this.toastService.success(`Witaj ${user.firstName} 😄`, 'Sukces');
+          this.toastService.success(`Witaj ${user.firstName} 😄`, "Sukces");
         },
         error: (error) => {
           console.log(error);
-          this.toastService.error('Niepoprawne dane logowania 😥', 'Błąd');
+          this.toastService.error("Niepoprawne dane logowania 😥", "Błąd");
         },
       });
     }
