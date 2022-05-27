@@ -28,10 +28,12 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatList, MatListModule } from "@angular/material/list";
 import { UserDetailsComponent } from "./user/user-details/user-details.component";
 import { SportObjectControlPanelComponent } from "./sport-objects/sport-objects-control-panel/sport-object-control-panel.component";
 import { CreateSportObjectDialogComponent } from "./sport-objects/create-sport-object-dialog/create-sport-object-dialog.component";
 import { JwtHelperService, JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
+import { StartComponent } from "./common/start/start.component";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -48,6 +50,7 @@ export function tokenGetter() {
     UserDetailsComponent,
     SportObjectControlPanelComponent,
     CreateSportObjectDialogComponent,
+    StartComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ export function tokenGetter() {
     MatCheckboxModule,
     MatDividerModule,
     MatDialogModule,
+    MatListModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
