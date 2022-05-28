@@ -101,6 +101,50 @@
         </mat-error>
       </mat-form-field>
     </div>
+
+    <!-- experiment -->
+
+    <mat-form-field class="example-chip-list" appearance="outline">
+      <mat-label>Kategorie obiektu sportowego</mat-label>
+      <mat-chip-list #chipList aria-label="Wybór kategorii">
+        <mat-chip
+          *ngFor="let category of categories"
+          (removed)="remove(category)"
+        >
+          {{ category }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          placeholder="Nowa kategoria.."
+          #categoryInput
+          formControlName="categoryCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+      <mat-error
+        *ngIf="categoryCtrl?.touched && categoryCtrl?.errors?.required"
+      >
+        Wybierz kategorię
+      </mat-error>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event)"
+      >
+        <mat-option
+          *ngFor="let category of filteredCategories | async"
+          [value]="category"
+        >
+          {{ category }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <!-- experiment -->
+
     <div class="control-buttons">
       <button color="accent" mat-raised-button type="submit">Utwórz</button>
       <button color="primary" mat-raised-button type="reset">Reset</button>

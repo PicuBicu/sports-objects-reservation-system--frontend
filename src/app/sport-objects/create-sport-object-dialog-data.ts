@@ -1,5 +1,5 @@
-import { Category } from "./category";
+import { Category } from "app/models/entities/category";
 
 export interface CreateSportObjectDialogData {
-    categories: Category[];
+  categories: Category[];
 }

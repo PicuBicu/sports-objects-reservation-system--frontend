@@ -28,7 +28,9 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatDialogModule } from "@angular/material/dialog";
-import { MatList, MatListModule } from "@angular/material/list";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatListModule } from "@angular/material/list";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { UserDetailsComponent } from "./user/user-details/user-details.component";
 import { SportObjectControlPanelComponent } from "./sport-objects/sport-objects-control-panel/sport-object-control-panel.component";
 import { CreateSportObjectDialogComponent } from "./sport-objects/create-sport-object-dialog/create-sport-object-dialog.component";
@@ -80,6 +82,8 @@ export function tokenGetter() {
     MatDividerModule,
     MatDialogModule,
     MatListModule,
+    MatChipsModule,
+    MatAutocompleteModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

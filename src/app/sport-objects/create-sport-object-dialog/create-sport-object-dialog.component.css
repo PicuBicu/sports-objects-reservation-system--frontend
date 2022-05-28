@@ -10,3 +10,6 @@
     display: flex;
     justify-content:space-evenly;
 }
+.example-chip-list {
+    width: 100%;
+  }
