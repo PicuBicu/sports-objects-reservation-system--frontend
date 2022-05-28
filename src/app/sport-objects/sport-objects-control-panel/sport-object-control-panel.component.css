@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+}
+
+.sport-objects-card-header {
+  display: flex;
+  justify-content:space-evenly;
+}
+
+.search-input {
+  width: 90%;
+}
+
+td, th {
+  width: fit-content
+}
