@@ -26,15 +26,15 @@ export class RoleGuard implements CanActivate {
     | boolean
     | UrlTree {
     const expectedRole = route.data.expectedRoles;
-    const token: string = localStorage.getItem("token") ?? "";
-    const payload: JwtPayload = decode(token);
+    const roles = this.authService.getUserRoles();
     if (this.authService.isLoggedIn()) {
-      if (this.authService.hasAnyRole(expectedRole, payload.roles)) {
+      if (this.authService.hasAnyRole(expectedRole, roles)) {
         return true;
       }
       this.router.navigateByUrl("home");
       return false;
     }
+    localStorage.clear();
     this.router.navigateByUrl("login");
     return false;
   }
