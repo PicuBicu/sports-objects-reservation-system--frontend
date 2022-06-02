@@ -1,25 +1,76 @@
 <mat-toolbar color="primary" class="application-header">
   <mat-toolbar-row class="header-row">
-    <span>⚽Orlikowo⚽</span>
-    <span class="example-spacer"></span>
-    <ng-container>
-      <span>Obiekty</span>
-      <span>Rezerwacje</span>
-      <span>Moje dane</span>
-      <span>
-        <a [routerLink]="['/users']"> Użytkownicy </a>
-      </span>
-    </ng-container>
-    <ng-container>
-      <span>
-        <a routerLink="/login">Zaloguj się</a>
-      </span>
-      <span>
-        <a routerLink="/register">Zarejestruj się</a>
-      </span>
-      <span>
-        <a (click)="logout()"> Wyloguj się </a>
-      </span>
-    </ng-container>
+    <div>
+      <a mat-flat-button color="primary" routerLink="/home"> ⚽ Orlikowo ⚽ </a>
+    </div>
+    <div>
+      <ng-container *ngIf="isAdmin; else noAdminRole">
+        <a mat-flat-button color="primary" routerLink="/reservations">
+          <mat-icon>bookmark</mat-icon>
+          Rezerwacje
+        </a>
+        <a mat-flat-button color="primary" routerLink="/users">
+          <mat-icon>manage_accounts</mat-icon>
+          Użytkownicy
+        </a>
+        <a mat-flat-button color="primary" routerLink="/sport-objects">
+          <mat-icon>sports</mat-icon>
+          Obiekty sportowe</a
+        >
+        <a mat-flat-button color="primary" routerLink="/categories">
+          <mat-icon>class</mat-icon>
+          Kategorie
+        </a>
+      </ng-container>
+      <ng-template #noAdminRole>
+        <a mat-flat-button color="primary" routerLink="">
+          <mat-icon>bookmark</mat-icon>
+          Moje rezerwacje
+        </a>
+        <a mat-flat-button color="primary" routerLink="">
+          <mat-icon>sports</mat-icon>
+          Przejrzyj obiekty
+        </a>
+      </ng-template>
+
+      <ng-container *ngIf="isLoggedIn; else needToBeLogged">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="authService.logout()">
+              <mat-icon>account_box</mat-icon>
+              <span>Profil</span>
+            </button>
+            <button mat-menu-item (click)="authService.logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Wyloguj się</span>
+            </button>
+          </mat-menu>
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #needToBeLogged>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="authService.logout()">
+              <mat-icon>login</mat-icon>
+              <span>Zaloguj się</span>
+            </button>
+            <button mat-menu-item (click)="authService.logout()">
+              <mat-icon>app_registration</mat-icon>
+              <span>Zarejestruj się</span>
+            </button>
+          </mat-menu>
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </ng-template>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>

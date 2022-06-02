@@ -1,9 +1,11 @@
-.example-spacer {
-  flex: 1 1 auto;
-}
-.header-row span {
-  margin-left: 10px;
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 .application-header {
   height: 5vh;
+}
+a {
+  color: white;
 }

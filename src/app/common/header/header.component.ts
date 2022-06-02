@@ -1,21 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {AuthService} from "../../auth/auth.service";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.css"],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  isLoggedIn: boolean;
+  isAdmin: boolean;
 
-  constructor(private router: Router, public authService: AuthService) { }
-
-  ngOnInit(): void {
+  constructor(public authService: AuthService) {
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.hasAdminRole();
   }
-
-  logout() {
-    this.authService.logout();
-  }
-  
 }
