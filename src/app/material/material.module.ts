@@ -18,6 +18,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatListModule } from "@angular/material/list";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatMenuModule } from "@angular/material/menu";
 
 const MaterialModules = [
   MatToolbarModule,
@@ -38,6 +39,7 @@ const MaterialModules = [
   MatListModule,
   MatChipsModule,
   MatAutocompleteModule,
+  MatMenuModule,
 ];
 
 @NgModule({
