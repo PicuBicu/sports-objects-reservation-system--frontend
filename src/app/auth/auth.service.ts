@@ -2,11 +2,12 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { LoginRequest } from "app/models/request/login-request";
 import { RegisterRequest } from "app/models/request/register-request";
-import { BehaviorSubject, Observable } from "rxjs";
-import * as moment from "moment";
 import { Router } from "@angular/router";
 import { User } from "app/models/entities/user";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtPayload } from "app/models/jwt-payload";
+import decode from "jwt-decode";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -62,5 +63,15 @@ export class AuthService {
 
   public hasAnyRole(expectedRole: string, roleList: string[]) {
     return roleList.filter((role) => expectedRole === role).length !== 0;
+  }
+
+  public getUserRoles() {
+    const token: string = localStorage.getItem("token") ?? "";
+    const payload: JwtPayload = decode(token);
+    return payload.roles;
+  }
+
+  public hasAdminRole(): boolean {
+    return this.hasAnyRole("ROLE_ADMIN", this.getUserRoles());
   }
 }
