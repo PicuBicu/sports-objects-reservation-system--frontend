@@ -1,15 +1,17 @@
 <app-header></app-header>
 <mat-card>
   <mat-card-title>Użytkownicy</mat-card-title>
-  <mat-form-field appearance="outline">
-    <mat-label>Wyszukiwarka</mat-label>
-    <input
-      #input
-      (keyup)="applyFilter($event)"
-      matInput
-      placeholder="Jan Kowalski"
-    />
-  </mat-form-field>
+  <mat-card-header>
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Wyszukiwarka</mat-label>
+      <input
+        #input
+        (keyup)="applyFilter($event)"
+        matInput
+        placeholder="Jan Kowalski"
+      />
+    </mat-form-field>
+  </mat-card-header>
   <mat-card-content>
     <div class="mat-elevation-z8">
       <table [dataSource]="dataSource" mat-table matSort>
@@ -38,7 +40,13 @@
         <ng-container matColumnDef="deletion">
           <th *matHeaderCellDef mat-header-cell>Usuń</th>
           <td *matCellDef="let row" mat-cell>
-            <button mat-button (click)="deleteUser(row.email)">Usuń</button>
+            <button
+              mat-icon-button
+              (click)="deleteUser(row.email)"
+              matTooltip="Usuń konto użytkownika"
+            >
+              <mat-icon color="warn"> delete </mat-icon>
+            </button>
           </td>
         </ng-container>
 
@@ -52,6 +60,7 @@
               (ngModelChange)="
                 setUserActivationStatus(row.email, row.isActivated)
               "
+              matTooltip="Zmień status aktywności konta użytkownika"
             >
             </mat-checkbox>
           </td>
@@ -60,7 +69,14 @@
         <ng-container matColumnDef="userData">
           <th *matHeaderCellDef mat-header-cell>Profil</th>
           <td *matCellDef="let row" mat-cell>
-            <a [routerLink]="['/users/', row.email]">Wyświetl</a>
+            <a
+              mat-flat-button
+              [routerLink]="['/users/', row.email]"
+              target="_blank"
+              matTooltip="Wyświetl detale użytkownika"
+            >
+              <mat-icon> open_in_new </mat-icon>
+            </a>
           </td>
         </ng-container>
 
