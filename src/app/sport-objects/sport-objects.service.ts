@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
-import { ThisReceiver } from "@angular/compiler";
 import { Injectable } from "@angular/core";
 import { NewSportObjectRequest } from "app/models/request/new-sport-object-request";
 import { Observable } from "rxjs";
 import { SportObject } from "./sport-object";
+import { UpdateSportObjectRequest } from "./update-sport-object-request";
 
 @Injectable({
   providedIn: "root",
@@ -25,7 +25,21 @@ export class SportObjectsService {
     return this.httpClient.get<SportObject[]>(`${this.httpUrl}/`);
   }
 
+  public getSportObjectById(sportObjectId: number): Observable<SportObject> {
+    return this.httpClient.get<SportObject>(`${this.httpUrl}/${sportObjectId}`);
+  }
+
   public deleteSportObjectById(id: number): Observable<any> {
     return this.httpClient.delete<any>(`${this.httpUrl}/${id}`);
+  }
+
+  public updateSportObjectById(
+    id: number,
+    sportObjectRequest: UpdateSportObjectRequest
+  ): Observable<any> {
+    return this.httpClient.put<any>(
+      `${this.httpUrl}/${id}`,
+      sportObjectRequest
+    );
   }
 }

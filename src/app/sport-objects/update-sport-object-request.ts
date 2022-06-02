@@ -1,4 +1,4 @@
-export interface NewSportObjectRequest {
+export interface UpdateSportObjectRequest {
   name: string;
   imageName: string;
   streetName: string;

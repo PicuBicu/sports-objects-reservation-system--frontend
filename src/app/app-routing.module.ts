@@ -5,6 +5,7 @@ import { RegisterComponent } from "./auth/register/register.component";
 import { RoleGuard } from "./auth/role.guard";
 import { StartComponent } from "./common/start/start.component";
 import { SportObjectControlPanelComponent } from "./sport-objects/sport-objects-control-panel/sport-object-control-panel.component";
+import { SportObjectsDetailsComponent } from "./sport-objects/sport-objects-details/sport-objects-details.component";
 import { UserControlPanelComponent } from "./user/user-control-panel/user-control-panel.component";
 import { UserDetailsComponent } from "./user/user-details/user-details.component";
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   },
   { path: "users/:email", component: UserDetailsComponent },
   { path: "sport-objects", component: SportObjectControlPanelComponent },
+  { path: "sport-objects/:id", component: SportObjectsDetailsComponent },
   { path: "**", component: StartComponent },
 ];
 

@@ -1,0 +1,200 @@
+<app-header></app-header>
+
+<div class="sport-object-card">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Aktualizacja obiektu sportowego</mat-card-title>
+      <img mat-card-image src="imageUrl" />
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="submitForm()" [formGroup]="form">
+        <div>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Nazwa:</mat-label>
+            <input
+              formControlName="name"
+              matInput
+              name="name"
+              placeholder="Orlik"
+              required
+              type="text"
+            />
+            <mat-error
+              *ngIf="
+                form.controls.name?.touched &&
+                form.controls.name?.errors?.required
+              "
+            >
+              Podaj nazwę obiektu sportowego
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Url obrazka:</mat-label>
+            <input
+              formControlName="imageName"
+              matInput
+              name="imageName"
+              placeholder="image url"
+              required
+              type="text"
+            />
+            <mat-error
+              *ngIf="
+                form.controls.imageName?.touched &&
+                form.controls.imageName?.errors?.required
+              "
+            >
+              Podaj url obrazka:
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Miasto:</mat-label>
+            <input
+              formControlName="cityName"
+              matInput
+              name="cityName"
+              placeholder="miasto"
+              required
+              type="text"
+            />
+            <mat-error
+              *ngIf="
+                form.controls.cityName?.touched &&
+                form.controls.cityName?.errors?.required
+              "
+            >
+              Podaj miasto
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Ulica:</mat-label>
+            <input
+              formControlName="streetName"
+              matInput
+              name="streetName"
+              placeholder="ulica"
+              required
+              type="text"
+            />
+            <mat-error
+              *ngIf="
+                form.controls.streetName?.touched &&
+                form.controls.streetName?.errors?.required
+              "
+            >
+              Podaj nazwę ulicy
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Numer ulicy:</mat-label>
+            <input
+              formControlName="streetNumber"
+              matInput
+              name="streetNumber"
+              placeholder="numer ulicy"
+              required
+              type="text"
+            />
+            <mat-error
+              *ngIf="
+                form.controls.streetNumber?.touched &&
+                form.controls.streetNumber?.errors?.required
+              "
+            >
+              Podaj numer ulicy
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Numer mieszkania:</mat-label>
+            <input
+              formControlName="localNumber"
+              matInput
+              name="localNumber"
+              placeholder="numer ulicy"
+              required
+              type="text"
+            />
+            <mat-error
+              *ngIf="
+                form.controls.localNumber?.touched &&
+                form.controls.localNumber?.errors?.required
+              "
+            >
+              Podaj numer mieszkania
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-chip-list" appearance="outline">
+            <mat-label>Kategorie obiektu sportowego</mat-label>
+            <mat-chip-list #chipList aria-label="Wybór kategorii">
+              <mat-chip
+                *ngFor="let category of categories"
+                (removed)="remove(category)"
+              >
+                {{ category }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input
+                placeholder="Nowa kategoria.."
+                [formControl]="categoryCtrl"
+                formControlName="categoryName"
+                #categoryInput
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-list>
+            <mat-error
+              *ngIf="
+                form.controls.categoryName?.touched &&
+                form.controls.categoryName?.errors?.required
+              "
+            >
+              Wybierz kategorię
+            </mat-error>
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              (optionSelected)="selected($event)"
+            >
+              <mat-option
+                *ngFor="let category of filteredCategories | async"
+                [value]="category"
+              >
+                {{ category }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="control-buttons">
+          <button color="accent" mat-raised-button type="submit">
+            Zaktualizuj
+          </button>
+          <button
+            color="primary"
+            mat-raised-button
+            type="reset"
+            (click)="clearCategories($event)"
+          >
+            Zresetuj
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<app-footer></app-footer>
