@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Dashboard </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Wyszukiwarka</mat-label>
+      <input
+        #input
+        matInput
+        placeholder="Orlik"
+        (keyup)="applyFilter($event)"
+      />
+    </mat-form-field>
+    <div class="mat-elevation-z8">
+      <table [dataSource]="dataSource" mat-table matSort>
+        <ng-container matColumnDef="id">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Id.</th>
+          <td *matCellDef="let row" mat-cell>{{ row.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Nazwa</th>
+          <td *matCellDef="let row" mat-cell>{{ row.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="deletion">
+          <th *matHeaderCellDef mat-header-cell>Usuń</th>
+          <td *matCellDef="let row" mat-cell>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleteCategory(row.name)"
+              matTooltip="Usuń kategorie"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+
+        <tr *matNoDataRow class="mat-row">
+          <td class="mat-cell" colspan="4">
+            Żadne dane nie pasują do filtra "{{ input.value }}"
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of categories"
+    ></mat-paginator>
+  </mat-card-footer>
+</mat-card>

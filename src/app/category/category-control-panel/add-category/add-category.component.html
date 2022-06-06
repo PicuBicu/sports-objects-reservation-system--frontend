@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Dodawanie kategorii </mat-card-title>
+  </mat-card-header>
+  <mat-card-content> </mat-card-content>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submitNewCategory()"
+    class="add-category-form"
+  >
+    <div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Nazwa:</mat-label>
+        <input
+          formControlName="categoryName"
+          matInput
+          name="categoryName"
+          placeholder="orlik, skatepark ..."
+          required
+          type="text"
+        />
+        <mat-error
+          *ngIf="
+            form.controls.categoryName?.touched &&
+            form.controls.categoryName?.errors?.required
+          "
+        >
+          Podaj nazwę nazwę kategorii
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-fab color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </form>
+</mat-card>

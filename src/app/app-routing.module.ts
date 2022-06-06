@@ -3,6 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
 import { RoleGuard } from "./auth/role.guard";
+import { AddCategoryComponent } from "./category/category-control-panel/add-category/add-category.component";
+import { CategoryControlPanelComponent } from "./category/category-control-panel/category-control-panel.component";
 import { StartComponent } from "./common/start/start.component";
 import { SportObjectControlPanelComponent } from "./sport-objects/sport-objects-control-panel/sport-object-control-panel.component";
 import { SportObjectsDetailsComponent } from "./sport-objects/sport-objects-details/sport-objects-details.component";
@@ -22,8 +24,23 @@ const routes: Routes = [
     },
   },
   { path: "users/:email", component: UserDetailsComponent },
-  { path: "sport-objects", component: SportObjectControlPanelComponent },
-  { path: "sport-objects/:id", component: SportObjectsDetailsComponent },
+  {
+    path: "sport-objects",
+    component: SportObjectControlPanelComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRoles: "ROLE_ADMIN",
+    },
+  },
+  {
+    path: "sport-objects/:id",
+    component: SportObjectsDetailsComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRoles: "ROLE_ADMIN",
+    },
+  },
+  { path: "categories", component: CategoryControlPanelComponent },
   { path: "**", component: StartComponent },
 ];
 

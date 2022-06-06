@@ -1,0 +1,7 @@
+.add-category-form {
+    display: flex;
+}
+
+.add-category-form mat-form-field {
+    margin: 0 10px;
+}

@@ -14,4 +14,15 @@ export class CategoryService {
   public getCategories(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(`${this.httpUrl}/`);
   }
+
+  public addCategory(name: string): Observable<string> {
+    return this.httpClient.post<any>(
+      `${this.httpUrl}?categoryName=${name}`,
+      {}
+    );
+  }
+
+  public deleteCategoryByName(name: string): Observable<string> {
+    return this.httpClient.delete<any>(`${this.httpUrl}?categoryName=${name}`);
+  }
 }

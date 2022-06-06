@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="content-wrapper">
+  <app-add-category
+    class="add-category-component"
+    (addedCategory)="refreshCategories($event)"
+  ></app-add-category>
+  <ng-container *ngIf="categories.length > 0">
+    <app-category-table
+      [categories]="categories"
+      class="category-dashboard"
+      (refreshCategories)="refreshCategories($event)"
+      [dataChanged]="hasDataChanged"
+    ></app-category-table>
+  </ng-container>
+</div>
+<app-footer></app-footer>
