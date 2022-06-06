@@ -1,98 +1,105 @@
 <app-header></app-header>
-<mat-card class="sport-objects-container">
-  <mat-card-title>Obiekty sportowe</mat-card-title>
-  <mat-card-header class="sport-objects-card-header">
-    <mat-form-field appearance="outline" class="search-input">
-      <mat-label>Wyszukiwarka</mat-label>
-      <input
-        #input
-        matInput
-        placeholder="Orlik"
-        (keyup)="applyFilter($event)"
-      />
-    </mat-form-field>
-    <button
-      mat-fab
-      color="primary"
-      (click)="openCreateSportObjectDialog()"
-      mat-dialog-close
-      cdkFocusInitial
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="mat-elevation-z8">
-      <table [dataSource]="dataSource" mat-table matSort>
-        <ng-container matColumnDef="id">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Id.</th>
-          <td *matCellDef="let row" mat-cell>{{ row.id }}</td>
-        </ng-container>
+<div class="content-wrapper">
+  <mat-card class="sport-objects-container">
+    <mat-card-title>Obiekty sportowe</mat-card-title>
+    <mat-card-header class="sport-objects-card-header">
+      <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Wyszukiwarka</mat-label>
+        <input
+          #input
+          matInput
+          placeholder="Orlik"
+          (keyup)="applyFilter($event)"
+        />
+      </mat-form-field>
+      <button
+        mat-fab
+        color="primary"
+        (click)="openCreateSportObjectDialog()"
+        mat-dialog-close
+        cdkFocusInitial
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mat-elevation-z8">
+        <table [dataSource]="dataSource" mat-table matSort>
+          <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>Id.</th>
+            <td *matCellDef="let row" mat-cell>{{ row.id }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Nazwa</th>
-          <td *matCellDef="let row" mat-cell>{{ row.name }}</td>
-        </ng-container>
+          <ng-container matColumnDef="name">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>Nazwa</th>
+            <td *matCellDef="let row" mat-cell>{{ row.name }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="imageName">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Obraz</th>
-          <td *matCellDef="let row" mat-cell>
-            <img [src]="row.imageName" alt="row.imageName" />
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="imageName">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>Obraz</th>
+            <td *matCellDef="let row" mat-cell>
+              <img [src]="row.imageName" alt="Zdjęcie obiektu sportowego" />
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="categories">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Kategorie</th>
-          <td *matCellDef="let row" mat-cell>
-            <mat-chip-list
-              mat-chip-list-stacked
-              *ngFor="let category of row.categories"
-            >
-              <mat-chip>{{ category.name }}</mat-chip>
-            </mat-chip-list>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="categories">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>Kategorie</th>
+            <td *matCellDef="let row" mat-cell>
+              <mat-chip-list
+                mat-chip-list-stacked
+                *ngFor="let category of row.categories"
+              >
+                <mat-chip>{{ category.name }}</mat-chip>
+              </mat-chip-list>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="deletion">
-          <th *matHeaderCellDef mat-header-cell>Usuń</th>
-          <td *matCellDef="let row" mat-cell>
-            <button
-              mat-icon-button
-              color="warn"
-              (click)="deleteSportObject(row.id)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="deletion">
+            <th *matHeaderCellDef mat-header-cell>Usuń</th>
+            <td *matCellDef="let row" mat-cell>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteSportObject(row.id)"
+                matTooltip="Usuń obiekt sportowy"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="selection">
-          <th *matHeaderCellDef mat-header-cell>Detale</th>
-          <td *matCellDef="let row" mat-cell>
-            <button mat-icon-button color="primary">
-              <a [routerLink]="['/sport-objects/', row.id]" target="_blank">
+          <ng-container matColumnDef="selection">
+            <th *matHeaderCellDef mat-header-cell>Detale</th>
+            <td *matCellDef="let row" mat-cell>
+              <a
+                mat-flat-button
+                matTooltip="Przejdź do zmiany detali obiektu sportowego"
+                [routerLink]="['/sport-objects/', row.id]"
+                target="_blank"
+              >
                 <mat-icon> open_in_new </mat-icon>
               </a>
-            </button>
-          </td>
-        </ng-container>
+            </td>
+          </ng-container>
 
-        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
 
-        <tr *matNoDataRow class="mat-row">
-          <td class="mat-cell" colspan="4">
-            Żadne dane nie pasują do filtra "{{ input.value }}"
-          </td>
-        </tr>
-      </table>
-    </div>
-  </mat-card-content>
-  <mat-card-footer>
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 25, 100]"
-      aria-label="Select page of sport-objects"
-    ></mat-paginator>
-  </mat-card-footer>
-</mat-card>
+          <tr *matNoDataRow class="mat-row">
+            <td class="mat-cell" colspan="4">
+              Żadne dane nie pasują do filtra "{{ input.value }}"
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of sport-objects"
+      ></mat-paginator>
+    </mat-card-footer>
+  </mat-card>
+</div>
+
 <app-footer></app-footer>

@@ -14,3 +14,12 @@ table {
 td, th {
   width: fit-content
 }
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.sport-objects-container {
+  margin: 10px;
+}

@@ -14,3 +14,7 @@ a {
   color: #000;
   text-decoration: none;
 }
+
+.users-container {
+  margin: 10px;
+}
