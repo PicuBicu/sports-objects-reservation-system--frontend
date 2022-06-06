@@ -4,7 +4,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>Aktualizacja obiektu sportowego</mat-card-title>
-      <img mat-card-image src="imageUrl" />
+      <img mat-card-image [src]="sportObject?.imageName" />
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="submitForm()" [formGroup]="form">
@@ -18,6 +18,7 @@
               placeholder="Orlik"
               required
               type="text"
+              [value]="sportObject?.name"
             />
             <mat-error
               *ngIf="
@@ -39,6 +40,7 @@
               placeholder="image url"
               required
               type="text"
+              [value]="sportObject?.imageName"
             />
             <mat-error
               *ngIf="
@@ -60,6 +62,7 @@
               placeholder="miasto"
               required
               type="text"
+              [value]="sportObject?.address?.cityName"
             />
             <mat-error
               *ngIf="
@@ -81,6 +84,7 @@
               placeholder="ulica"
               required
               type="text"
+              [value]="sportObject?.address?.streetName"
             />
             <mat-error
               *ngIf="
@@ -102,6 +106,7 @@
               placeholder="numer ulicy"
               required
               type="text"
+              [value]="sportObject?.address?.streetNumber"
             />
             <mat-error
               *ngIf="
@@ -123,6 +128,7 @@
               placeholder="numer ulicy"
               required
               type="text"
+              [value]="sportObject?.address?.localNumber"
             />
             <mat-error
               *ngIf="
