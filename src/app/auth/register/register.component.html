@@ -112,7 +112,9 @@
             </div>
             <div>
               <button mat-raised-button matStepperNext>Dalej</button>
-              <button mat-raised-button type="reset">Resetuj</button>
+              <button mat-raised-button type="reset" (click)="stepper.reset()">
+                Resetuj
+              </button>
             </div>
           </form>
         </mat-step>
