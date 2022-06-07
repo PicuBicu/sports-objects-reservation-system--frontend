@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Event } from "@angular/router";
 import { AuthService } from "../../auth/auth.service";
 
 @Component({
@@ -15,5 +16,9 @@ export class HeaderComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.isAdmin = this.authService.hasAdminRole();
     this.email = sessionStorage.getItem("email") ?? "";
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
