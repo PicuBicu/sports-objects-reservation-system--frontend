@@ -53,16 +53,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (user) => {
           this.authService.saveUserInSessionStorage(user);
           this.authService.saveToken(user.jwtToken);
-          this.toastService
-            .success(`Witaj ${user.firstName} 😄`, "Sukces")
-            .onShown.subscribe({
-              next: () => {
-                this.router.navigateByUrl("home");
-              },
-            });
+          this.toastService.success(`Witaj ${user.firstName} 😄`, "Sukces");
+          this.router.navigateByUrl("home");
         },
         error: (error) => {
-          console.log(error);
           this.toastService.error("Niepoprawne dane logowania 😥", "Błąd");
         },
       });
