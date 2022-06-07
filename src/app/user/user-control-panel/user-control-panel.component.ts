@@ -59,6 +59,7 @@ export class UserControlPanelComponent {
   deleteUser(email: string) {
     this.userService.deleteUserByEmail(email).subscribe({
       next: (message) => {
+        this.getUsers();
         this.toastService.success("Pomyślnie usunięto użytkownika");
       },
       error: (error) => {
