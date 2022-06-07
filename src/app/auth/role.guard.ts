@@ -6,6 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 
@@ -13,7 +14,11 @@ import { AuthService } from "./auth.service";
   providedIn: "root",
 })
 export class RoleGuard implements CanActivate {
-  constructor(public authService: AuthService, public router: Router) {}
+  constructor(
+    public authService: AuthService,
+    public router: Router,
+    private toastService: ToastrService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -29,10 +34,12 @@ export class RoleGuard implements CanActivate {
       if (this.authService.hasAnyRole(expectedRole, roles)) {
         return true;
       }
+      this.toastService.warning("Brak uprawnień");
       this.router.navigateByUrl("home");
       return false;
     }
     localStorage.clear();
+    sessionStorage.clear();
     this.router.navigateByUrl("login");
     return false;
   }

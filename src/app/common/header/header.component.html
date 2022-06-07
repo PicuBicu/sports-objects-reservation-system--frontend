@@ -23,11 +23,11 @@
         </a>
       </ng-container>
       <ng-template #noAdminRole>
-        <a mat-flat-button color="primary" routerLink="">
-          <mat-icon>bookmark</mat-icon>
-          Moje rezerwacje
-        </a>
-        <a mat-flat-button color="primary" routerLink="">
+        <a
+          mat-flat-button
+          color="primary"
+          routerLink="/available-sport-objects"
+        >
           <mat-icon>sports</mat-icon>
           Przejrzyj obiekty
         </a>
@@ -40,10 +40,14 @@
           aria-label="Example icon-button with a menu"
         >
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="authService.logout()">
-              <mat-icon>account_box</mat-icon>
-              <span>Profil</span>
-            </button>
+            <a
+              mat-menu-item
+              [routerLink]="['/users/', email]"
+              class="profile-link"
+            >
+              <mat-icon>bookmark</mat-icon>
+              Moje rezerwacje
+            </a>
             <button mat-menu-item (click)="authService.logout()">
               <mat-icon>logout</mat-icon>
               <span>Wyloguj się</span>

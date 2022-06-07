@@ -1,5 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component } from "@angular/core";
 import { AuthService } from "../../auth/auth.service";
 
 @Component({
@@ -10,9 +9,11 @@ import { AuthService } from "../../auth/auth.service";
 export class HeaderComponent {
   isLoggedIn: boolean;
   isAdmin: boolean;
+  email: string;
 
   constructor(public authService: AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.isAdmin = this.authService.hasAdminRole();
+    this.email = sessionStorage.getItem("email") ?? "";
   }
 }
