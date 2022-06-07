@@ -6,6 +6,7 @@ import { RoleGuard } from "./auth/role.guard";
 import { AddCategoryComponent } from "./category/category-control-panel/add-category/add-category.component";
 import { CategoryControlPanelComponent } from "./category/category-control-panel/category-control-panel.component";
 import { StartComponent } from "./common/start/start.component";
+import { ReservationControlPanelComponent } from "./reservations/reservation-control-panel/reservation-control-panel.component";
 import { AvailableSportObjectsComponent } from "./sport-objects/available-sport-objects/available-sport-objects.component";
 import { MakeReservationComponent } from "./sport-objects/make-reservation/make-reservation.component";
 import { SportObjectControlPanelComponent } from "./sport-objects/sport-objects-control-panel/sport-object-control-panel.component";
@@ -60,6 +61,14 @@ const routes: Routes = [
   {
     path: "categories",
     component: CategoryControlPanelComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRoles: "ROLE_ADMIN",
+    },
+  },
+  {
+    path: "reservations",
+    component: ReservationControlPanelComponent,
     canActivate: [RoleGuard],
     data: {
       expectedRoles: "ROLE_ADMIN",

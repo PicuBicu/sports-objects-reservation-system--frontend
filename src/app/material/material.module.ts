@@ -23,6 +23,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatRadioModule } from "@angular/material/radio";
+import { MatSelectModule } from "@angular/material/select";
 
 const MaterialModules = [
   MatToolbarModule,
@@ -48,6 +49,7 @@ const MaterialModules = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatRadioModule,
+  MatSelectModule,
 ];
 
 @NgModule({

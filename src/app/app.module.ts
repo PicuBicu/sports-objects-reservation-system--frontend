@@ -26,6 +26,9 @@ import { CategoryControlPanelComponent } from "./category/category-control-panel
 import { CategoryTableComponent } from "./category/category-control-panel/category-table/category-table.component";
 import { AvailableSportObjectsComponent } from "./sport-objects/available-sport-objects/available-sport-objects.component";
 import { MakeReservationComponent } from "./sport-objects/make-reservation/make-reservation.component";
+import { ReservationControlPanelComponent } from "./reservations/reservation-control-panel/reservation-control-panel.component";
+import { ReservationTableComponent } from "./reservations/reservation-control-panel/reservation-table/reservation-table.component";
+import { ReservationStatusSelectionComponent } from './reservations/reservation-status-selection/reservation-status-selection.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -49,6 +52,9 @@ export function tokenGetter() {
     CategoryTableComponent,
     AvailableSportObjectsComponent,
     MakeReservationComponent,
+    ReservationControlPanelComponent,
+    ReservationTableComponent,
+    ReservationStatusSelectionComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,69 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Dashboard </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Wyszukiwarka</mat-label>
+      <input
+        #input
+        matInput
+        placeholder="Rezerwacje"
+        (keyup)="applyFilter($event)"
+      />
+    </mat-form-field>
+    <div class="mat-elevation-z8">
+      <table [dataSource]="dataSource" mat-table matSort>
+        <ng-container matColumnDef="id">
+          <th *matHeaderCellDef mat-header-cell>Id.</th>
+          <td *matCellDef="let row" mat-cell>{{ row.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th *matHeaderCellDef mat-header-cell>status</th>
+          <td *matCellDef="let row" mat-cell>{{ row.status.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th *matHeaderCellDef mat-header-cell>email</th>
+          <td *matCellDef="let row" mat-cell>{{ row.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="creationDate">
+          <th *matHeaderCellDef mat-header-cell>data utworzenia</th>
+          <td *matCellDef="let row" mat-cell>{{ row.creationDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="reservationDate">
+          <th *matHeaderCellDef mat-header-cell>data rezerwacji</th>
+          <td *matCellDef="let row" mat-cell>{{ row.reservationDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="numOfUsers">
+          <th *matHeaderCellDef mat-header-cell>Ilość użytkowników</th>
+          <td *matCellDef="let row" mat-cell>{{ row.numOfUsers }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="sportObjectId">
+          <th *matHeaderCellDef mat-header-cell>Id obiektu sportowego</th>
+          <td *matCellDef="let row" mat-cell>{{ row.sportObjectId }}</td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+
+        <tr *matNoDataRow class="mat-row">
+          <td class="mat-cell" colspan="4">
+            Żadne dane nie pasują do filtra "{{ input.value }}"
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of categories"
+    ></mat-paginator>
+  </mat-card-footer>
+</mat-card>
