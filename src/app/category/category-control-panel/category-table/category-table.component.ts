@@ -65,9 +65,22 @@ export class CategoryTableComponent
   }
 
   deleteCategory(name: string) {
-    this.categoryService.deleteCategoryByName(name).subscribe((response) => {
-      this.toastService.success("Pomyślnie usunięto kategorię");
-      this.refreshCategories.emit(name);
+    this.categoryService.deleteCategoryByName(name).subscribe({
+      next: (data) => {
+        this.toastService.success("Pomyślnie usunięto kategorię");
+        this.refreshCategories.emit(name);
+      },
+      error: (error) => {
+        if (error.status === 400) {
+          this.toastService.error(
+            `Nie udało się usunąć kategorii o nazwie ${name} z powodu zależności do obiektu sportowego`
+          );
+        } else {
+          this.toastService.error(
+            `Nie udało się usunąć kategorii o nazwie ${name}`
+          );
+        }
+      },
     });
   }
 }

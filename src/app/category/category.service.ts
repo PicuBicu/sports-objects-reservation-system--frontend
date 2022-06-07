@@ -16,13 +16,15 @@ export class CategoryService {
   }
 
   public addCategory(name: string): Observable<string> {
-    return this.httpClient.post<any>(
+    return this.httpClient.post<string>(
       `${this.httpUrl}?categoryName=${name}`,
-      {}
+      null
     );
   }
 
   public deleteCategoryByName(name: string): Observable<string> {
-    return this.httpClient.delete<any>(`${this.httpUrl}?categoryName=${name}`);
+    return this.httpClient.delete<string>(
+      `${this.httpUrl}?categoryName=${name}`
+    );
   }
 }
