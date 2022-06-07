@@ -71,6 +71,10 @@ export class MakeReservationComponent implements OnInit {
               message =
                 "Podany użytkownik posiada już rezerwację na dany termin";
               break;
+
+            case 400:
+              message = "Rezerwacja jest po terminie";
+              break;
             default:
               message = "Nie udało się dokonać rezerwacji";
           }
