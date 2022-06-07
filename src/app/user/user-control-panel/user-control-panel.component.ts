@@ -46,7 +46,6 @@ export class UserControlPanelComponent {
   private getUsers(): void {
     this.userService.getAllUsers().subscribe({
       next: (users) => {
-        console.log(users);
         this.dataSource = new MatTableDataSource(users);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -63,7 +62,6 @@ export class UserControlPanelComponent {
         this.toastService.success("Pomyślnie usunięto użytkownika");
       },
       error: (error) => {
-        console.log(error);
         this.toastService.error("Nie udało się usunąć użytkownika");
       },
     });
