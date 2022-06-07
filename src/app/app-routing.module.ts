@@ -40,10 +40,6 @@ const routes: Routes = [
   {
     path: "users/:email",
     component: UserDetailsComponent,
-    canActivate: [RoleGuard],
-    data: {
-      expectedRoles: "ROLE_ADMIN",
-    },
   },
   {
     path: "sport-objects",
