@@ -63,14 +63,14 @@
           aria-label="Example icon-button with a menu"
         >
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="authService.logout()">
+            <a mat-menu-item [routerLink]="['/login']" class="profile-link">
               <mat-icon>login</mat-icon>
               <span>Zaloguj się</span>
-            </button>
-            <button mat-menu-item (click)="authService.logout()">
+            </a>
+            <a mat-menu-item [routerLink]="['/register']" class="profile-link">
               <mat-icon>app_registration</mat-icon>
               <span>Zarejestruj się</span>
-            </button>
+            </a>
           </mat-menu>
           <mat-icon>account_circle</mat-icon>
         </button>
