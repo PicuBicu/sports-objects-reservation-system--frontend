@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Reservation } from "app/models/entities/reservation";
 import { User } from "app/models/entities/user";
 import { ToastrService } from "ngx-toastr";
+import { map } from "rxjs";
 import { UserService } from "../user.service";
 
 @Component({
@@ -30,9 +31,13 @@ export class UserDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const email: string = this.route.snapshot.params.email;
-    this.getUserDetails(email);
-    this.getUserReservations(email);
+    const email = this.route.params.pipe(map((p) => p.email));
+    email.subscribe({
+      next: (email) => {
+        this.getUserDetails(email);
+        this.getUserReservations(email);
+      },
+    });
   }
 
   public getUserDetails(email: string) {
