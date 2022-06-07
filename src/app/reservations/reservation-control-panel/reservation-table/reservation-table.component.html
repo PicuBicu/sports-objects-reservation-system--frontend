@@ -13,7 +13,7 @@
       />
     </mat-form-field>
     <div class="mat-elevation-z8">
-      <table [dataSource]="dataSource" mat-table matSort>
+      <table [dataSource]="dataSource" mat-table>
         <ng-container matColumnDef="id">
           <th *matHeaderCellDef mat-header-cell>Id.</th>
           <td *matCellDef="let row" mat-cell>{{ row.id }}</td>
@@ -21,7 +21,22 @@
 
         <ng-container matColumnDef="status">
           <th *matHeaderCellDef mat-header-cell>status</th>
-          <td *matCellDef="let row" mat-cell>{{ row.status.name }}</td>
+          <td *matCellDef="let row" mat-cell>
+            <mat-form-field appearance="outline">
+              <mat-label>Status rezerwacji</mat-label>
+              <mat-select
+                class="status-select-change"
+                (selectionChange)="changeStatus($event, row.id)"
+                [(value)]="row.status.name"
+              >
+                <mat-option
+                  *ngFor="let status of statuses"
+                  [value]="status.name"
+                  >{{ status.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="email">

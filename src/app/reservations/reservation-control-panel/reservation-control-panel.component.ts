@@ -51,5 +51,6 @@ export class ReservationControlPanelComponent implements OnInit {
   }
   refreshReservations(data: MatSelectChange) {
     this.getReservationWithStatus(data.value);
+    console.log("XD");
   }
 }

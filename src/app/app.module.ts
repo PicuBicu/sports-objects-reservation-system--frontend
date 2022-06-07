@@ -28,7 +28,6 @@ import { AvailableSportObjectsComponent } from "./sport-objects/available-sport-
 import { MakeReservationComponent } from "./sport-objects/make-reservation/make-reservation.component";
 import { ReservationControlPanelComponent } from "./reservations/reservation-control-panel/reservation-control-panel.component";
 import { ReservationTableComponent } from "./reservations/reservation-control-panel/reservation-table/reservation-table.component";
-import { ReservationStatusSelectionComponent } from './reservations/reservation-status-selection/reservation-status-selection.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -54,7 +53,6 @@ export function tokenGetter() {
     MakeReservationComponent,
     ReservationControlPanelComponent,
     ReservationTableComponent,
-    ReservationStatusSelectionComponent,
   ],
   imports: [
     BrowserModule,

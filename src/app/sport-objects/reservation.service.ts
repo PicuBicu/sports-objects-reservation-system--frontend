@@ -28,4 +28,11 @@ export class ReservationService {
   public getReservationStatuses(): Observable<ReservationStatus[]> {
     return this.httpClient.get<ReservationStatus[]>(`${this.httpUrl}/status/`);
   }
+
+  public setReservationStatus(id: number, status: string): Observable<string> {
+    return this.httpClient.put<string>(
+      `${this.httpUrl}/${id}/status/${status}`,
+      {}
+    );
+  }
 }

@@ -6,6 +6,10 @@ td, th {
     width: fit-content;
 }
 
+mat-form-field {
+    margin-top:20px;
+}
+
 mat-card {
     margin: 10px;
 }
