@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<div class="content-wrapper">
+  <mat-list>
+    <mat-list-item>
+      <mat-card class="single-card" *ngFor="let sportObject of sportObjects">
+        <mat-card-header>
+          <img
+            mat-card-avatar
+            [src]="sportObject.imageName"
+            [alt]="sportObject.name"
+          />
+          <mat-card-title>{{ sportObject.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Miasto:{{ sportObject.address.cityName }}</p>
+          <p>
+            Ulica:{{ sportObject.address.streetName }}
+            {{ sportObject.address.streetNumber }} /
+            {{ sportObject.address.localNumber }}
+          </p>
+          <mat-chip-list *ngFor="let category of sportObject.categories">
+            <mat-chip>{{ category.name }}</mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+        <mat-card-footer>
+          <a
+            mat-flat-button
+            [routerLink]="['/sport-objects/', sportObject.id, 'reservation']"
+          >
+            <mat-icon>book</mat-icon>
+            Rezerwuj
+          </a>
+        </mat-card-footer>
+      </mat-card>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<app-footer></app-footer>

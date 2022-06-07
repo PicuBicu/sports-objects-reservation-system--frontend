@@ -1,0 +1,79 @@
+<app-header></app-header>
+
+<div class="content-wrapper">
+  <mat-card class="make-reservation-form-wrapper">
+    <mat-card-content>
+      <form [formGroup]="makeReservationForm" (ngSubmit)="makeNewReservation()">
+        <mat-card-title>Rezerwacja</mat-card-title>
+
+        <div>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Wybierz datę rezerwacji</mat-label>
+            <input
+              #date
+              formControlName="day"
+              matInput
+              name="day"
+              [matDatepicker]="picker"
+            />
+            <mat-error
+              *ngIf="
+                makeReservationForm.controls.day?.touched &&
+                makeReservationForm.controls.day?.errors?.required
+              "
+            >
+              Wymagana jest data rezerwacji
+            </mat-error>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Podaj ilość uczestników:</mat-label>
+            <input
+              formControlName="numOfUsers"
+              matInput
+              name="numOfUsers"
+              placeholder="1 .. 10"
+              required=""
+              min="1"
+              max="10"
+              type="number"
+            />
+            <mat-error
+              *ngIf="
+                makeReservationForm.controls.numOfUsers?.touched &&
+                makeReservationForm.controls.numOfUsers?.errors?.min
+              "
+            >
+              Wymagana ilość uczestników większa od 0
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <ng-container *ngIf="date.value">
+            <mat-radio-group
+              name="hours"
+              *ngFor="let hour of hours"
+              class="radio-group"
+              formControlName="hours"
+            >
+              <mat-radio-button [value]="hour">{{ hour }}</mat-radio-button>
+            </mat-radio-group>
+          </ng-container>
+        </div>
+        <div>
+          <button color="accent" mat-raised-button type="submit">
+            Rezerwuj
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<app-footer></app-footer>

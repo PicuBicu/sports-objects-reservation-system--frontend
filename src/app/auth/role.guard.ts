@@ -6,8 +6,6 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
-import { JwtPayload } from "app/models/jwt-payload";
-import decode from "jwt-decode";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 

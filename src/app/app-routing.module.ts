@@ -6,6 +6,8 @@ import { RoleGuard } from "./auth/role.guard";
 import { AddCategoryComponent } from "./category/category-control-panel/add-category/add-category.component";
 import { CategoryControlPanelComponent } from "./category/category-control-panel/category-control-panel.component";
 import { StartComponent } from "./common/start/start.component";
+import { AvailableSportObjectsComponent } from "./sport-objects/available-sport-objects/available-sport-objects.component";
+import { MakeReservationComponent } from "./sport-objects/make-reservation/make-reservation.component";
 import { SportObjectControlPanelComponent } from "./sport-objects/sport-objects-control-panel/sport-object-control-panel.component";
 import { SportObjectsDetailsComponent } from "./sport-objects/sport-objects-details/sport-objects-details.component";
 import { UserControlPanelComponent } from "./user/user-control-panel/user-control-panel.component";
@@ -16,6 +18,18 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   {
+    path: "available-sport-objects",
+    component: AvailableSportObjectsComponent,
+  },
+  {
+    path: "sport-objects/:id/reservation",
+    component: MakeReservationComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRoles: "ROLE_USER",
+    },
+  },
+  {
     path: "users",
     component: UserControlPanelComponent,
     canActivate: [RoleGuard],
@@ -23,7 +37,14 @@ const routes: Routes = [
       expectedRoles: "ROLE_ADMIN",
     },
   },
-  { path: "users/:email", component: UserDetailsComponent },
+  {
+    path: "users/:email",
+    component: UserDetailsComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRoles: "ROLE_ADMIN",
+    },
+  },
   {
     path: "sport-objects",
     component: SportObjectControlPanelComponent,
@@ -40,8 +61,15 @@ const routes: Routes = [
       expectedRoles: "ROLE_ADMIN",
     },
   },
-  { path: "categories", component: CategoryControlPanelComponent },
-  { path: "**", component: StartComponent },
+  {
+    path: "categories",
+    component: CategoryControlPanelComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRoles: "ROLE_ADMIN",
+    },
+  },
+  { path: "**", component: StartComponent, pathMatch: "full" },
 ];
 
 @NgModule({

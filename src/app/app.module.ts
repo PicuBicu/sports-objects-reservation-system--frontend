@@ -24,6 +24,8 @@ import { MaterialModule } from "./material/material.module";
 import { AddCategoryComponent } from "./category/category-control-panel/add-category/add-category.component";
 import { CategoryControlPanelComponent } from "./category/category-control-panel/category-control-panel.component";
 import { CategoryTableComponent } from "./category/category-control-panel/category-table/category-table.component";
+import { AvailableSportObjectsComponent } from "./sport-objects/available-sport-objects/available-sport-objects.component";
+import { MakeReservationComponent } from "./sport-objects/make-reservation/make-reservation.component";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -45,6 +47,8 @@ export function tokenGetter() {
     AddCategoryComponent,
     CategoryControlPanelComponent,
     CategoryTableComponent,
+    AvailableSportObjectsComponent,
+    MakeReservationComponent,
   ],
   imports: [
     BrowserModule,
