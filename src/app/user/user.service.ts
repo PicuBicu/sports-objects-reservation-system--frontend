@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "app/models/entities/user";
+import { Reservation } from "app/models/entities/reservation";
 
 @Injectable({
   providedIn: "root",
@@ -23,6 +24,12 @@ export class UserService {
     return this.httpClient.delete(`${this.userUrl}/${email}`, {
       responseType: "text",
     });
+  }
+
+  public getUsersReservations(email: string): Observable<Reservation[]> {
+    return this.httpClient.get<Reservation[]>(
+      `${this.userUrl}/${email}/reservations`
+    );
   }
 
   public getAllUsersByActivationStatus(

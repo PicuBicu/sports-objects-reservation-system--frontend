@@ -1,34 +1,83 @@
 <app-header></app-header>
-<mat-card class="user-data-card">
+
+<div class="content-wrapper">
+  <mat-card class="user-data-card">
     <mat-card-header>
-        <div mat-card-avatar>
-            <mat-icon>face</mat-icon>
-        </div>
-        <mat-card-title>{{userData?.email}}</mat-card-title>
-        <mat-card-subtitle>
-            {{userData?.role}}
-        </mat-card-subtitle>
+      <div mat-card-avatar>
+        <mat-icon>face</mat-icon>
+      </div>
+      <mat-card-title>{{ userData?.email }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ userData?.role }}
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <h4>Dane osobowe</h4>
-        <p>Imie: {{userData?.firstName}}</p>
-        <p>Nazwisko: {{userData?.lastName}}</p>
-        <p>Numer telefonu: {{userData?.phoneNumber}}</p>
-        <h4>Adres zamieszkania</h4>
-        <p>Ulica: {{userData?.address?.streetName}} {{userData?.address?.streetNumber}} / {{ userData?.address?.localNumber }}</p>
-        <p>Miasto: {{userData?.address?.cityName}}</p>
+      <h4>Dane osobowe</h4>
+      <p>Imie: {{ userData?.firstName }}</p>
+      <p>Nazwisko: {{ userData?.lastName }}</p>
+      <p>Numer telefonu: {{ userData?.phoneNumber }}</p>
+      <h4>Adres zamieszkania</h4>
+      <p>
+        ul: {{ userData?.address?.streetName }}
+        {{ userData?.address?.streetNumber }} /
+        {{ userData?.address?.localNumber }}
+      </p>
+      <p>Miasto: {{ userData?.address?.cityName }}</p>
     </mat-card-content>
-    <mat-card-footer>
-        <!-- TODO: creation timestamp -->
-        <p>Data utworzenia: </p>
-    </mat-card-footer>
-</mat-card>
-<mat-card class="user-reservations-card">
+  </mat-card>
+
+  <mat-card class="user-reservations-card">
     <mat-card-header>
-        <div mat-card-avatar>
-            <mat-icon>card_travel</mat-icon>
-        </div>
-        <mat-card-title>Rezerwacje</mat-card-title>
+      <div mat-card-avatar>
+        <mat-icon>card_travel</mat-icon>
+      </div>
+      <mat-card-title>Rezerwacje</mat-card-title>
     </mat-card-header>
-</mat-card>
+    <mat-card-content>
+      <div class="mat-elevation-z8">
+        <table [dataSource]="userReservations" mat-table>
+          <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell>Id.</th>
+            <td *matCellDef="let row" mat-cell>{{ row.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th *matHeaderCellDef mat-header-cell>status</th>
+            <td *matCellDef="let row" mat-cell>{{ row.status.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="creationDate">
+            <th *matHeaderCellDef mat-header-cell>data utworzenia</th>
+            <td *matCellDef="let row" mat-cell>{{ row.creationDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="reservationDate">
+            <th *matHeaderCellDef mat-header-cell>data rezerwacji</th>
+            <td *matCellDef="let row" mat-cell>{{ row.reservationDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="numOfUsers">
+            <th *matHeaderCellDef mat-header-cell>Ilość użytkowników</th>
+            <td *matCellDef="let row" mat-cell>{{ row.numOfUsers }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="sportObjectId">
+            <th *matHeaderCellDef mat-header-cell>Id obiektu sportowego</th>
+            <td *matCellDef="let row" mat-cell>{{ row.sportObject.id }}</td>
+          </ng-container>
+
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+
+          <tr *matNoDataRow class="mat-row">
+            <td class="mat-cell" colspan="4">
+              Użytkownik nie posiada jeszcze rezerwacji
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 <app-footer></app-footer>
