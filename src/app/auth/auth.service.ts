@@ -67,8 +67,12 @@ export class AuthService {
 
   public getUserRoles() {
     const token: string = localStorage.getItem("token") ?? "";
-    const payload: JwtPayload = decode(token);
-    return payload.roles;
+    if (token) {
+      const payload: JwtPayload = decode(token);
+      return payload.roles;
+    } else {
+      return [];
+    }
   }
 
   public hasAdminRole(): boolean {
