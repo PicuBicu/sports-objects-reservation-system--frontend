@@ -30,6 +30,9 @@ export class AddCategoryComponent {
           this.toastService.success(`Dodano kategorię ${categoryName}`);
           this.addedCategory.emit();
           this.form.reset();
+          this.form.markAsPristine();
+          this.form.clearValidators();
+          console.log(this.form.controls.categoryName);
         },
         error: (error) => {
           this.toastService.error(
